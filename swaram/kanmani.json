@@ -1,0 +1,43 @@
+{
+  "title": "Title",
+  "raagam": "Raagam",
+  "thaalam": "Thallam",
+  "composer": "Composer",
+  "arohanam": [
+    "Sa",
+    "Ri1",
+    "Ga1",
+    "Ma1",
+    "Pa",
+    "Da1",
+    "Ni1",
+    "Saa"
+  ],
+  "avarohanam": [
+    "Saa",
+    "Ni1",
+    "Da1",
+    "Pa",
+    "Ma1",
+    "Ga1",
+    "Ri1",
+    "Sa"
+  ],
+  "swaram": [
+    {
+      "syllable": [
+        {
+          "sign": [
+            "Ga Ma Da",
+            "Pa Pa Ma"
+          ],
+          "lyric": [
+            "kanmani",
+            "anbodu"
+          ]
+        }
+      ],
+      "repeat": 0
+    }
+  ]
+}
