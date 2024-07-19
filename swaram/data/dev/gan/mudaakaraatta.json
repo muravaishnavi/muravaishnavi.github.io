@@ -1,20 +1,22 @@
 {
   "title": "Ganesha Pancharathnam",
+  "genre": "Devotional",
+  "composer": "Shri. Adi Sankara",
   "songs": [
     {
+      "title": "Song#1",
       "raagam": "Hamsadwani",
-      "thaalam": "",
-      "composer": "Shri. Adi Sankara",
+      "thaalam": "Ekam",
       "arohanam": [
         "Sa",
         "Ri2",
         "Ga2",
         "Pa",
         "Ni2",
-        "Sa`"
+        "Saa"
       ],
       "avarohanam": [
-        "Sa`",
+        "Saa",
         "Ni2",
         "Pa",
         "Ga2",
@@ -44,6 +46,225 @@
             "lyric": [
               "Sadaa Vimukti",
               "Saadhakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ni Rii Ni Rii Ri",
+              "Ni Pa Ni Rii"
+            ],
+            "lyric": [
+              "Kalaa-Dhara",
+              "Avatamsakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ga Gaa Pa Rii Ri",
+              "Nii Ri Sa"
+            ],
+            "lyric": [
+              "Vilaasi-Loka",
+              "Raksakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ga Rii Ri Gaa Ga",
+              "Paa Pa Paa"
+            ],
+            "lyric": [
+              "Anaayakaika",
+              "Naayakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Pa Gaa Ga Paa Pa",
+              "Nii Saa Nii"
+            ],
+            "lyric": [
+              "Vinaashitebha",
+              "Daityakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ni Gaa Ri Nii Ri",
+              "Gaa Ri Saa"
+            ],
+            "lyric": [
+              "Nata-Ashubha-Ashu",
+              "Naashakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Pa Saa Sa Gaa Pa",
+              "Saa Sa Saa"
+            ],
+            "lyric": [
+              "Namaami-Tham",
+              "Vinaayakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Pa Saa Sa Gaa Pa",
+              "Paa Ri Saa"
+            ],
+            "lyric": [
+              "Namaami-Tham",
+              "Vinaayakam"
+            ]
+          },
+          "repeat": 0
+        }
+      ]
+    },
+    {
+      "title": "Song#2",
+      "raagam": "Malahari",
+      "thaalam": "",
+      "arohanam": [
+        "Sa",
+        "Ri1",
+        "Ma1",
+        "Pa",
+        "Da1",
+        "Saa"
+      ],
+      "avarohanam": [
+        "Saa",
+        "Da1",
+        "Pa",
+        "Ma1",
+        "Ga2",
+        "Ri1",
+        "Sa"
+      ],
+      "swaram": [
+        {
+          "syllable": {
+            "sign": [
+              "Ma Maa Ma Rii Ri",
+              "Ri Ma Ri Saa"
+            ],
+            "lyric": [
+              "Natetara-Ati",
+              "Bhiikaram"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Sa Daa Da Paa Da",
+              "Paa Da Saa"
+            ],
+            "lyric": [
+              "Navodita-Arka",
+              "Bhaasvaram"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Sa Maa Ma Paa Pa",
+              "Paa Da Paa"
+            ],
+            "lyric": [
+              "Namat-Sura-Ari",
+              "Nir-Jaram"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Sa Daa Sa Paa Da",
+              "Maa Ma Paa"
+            ],
+            "lyric": [
+              "Nata-Adhika-Apad",
+              "Uddharam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Pa Rii Sa Rii",
+              "Sa Daa Sa Rii"
+            ],
+            "lyric": [
+              "Sureshvaram",
+              "Nidhi-ishvaram"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ri Maa Ga Rii",
+              "Sa Daa Ri Saa"
+            ],
+            "lyric": [
+              "Gajeshvaram",
+              "Ganneshvaram"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ma Gaa Ri Saa",
+              "Sa Daa Da Paa"
+            ],
+            "lyric": [
+              "Maheshvaram",
+              "Tama-Ashraye"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Sa Saa Sa Paa Ma",
+              "Rii Ri Saa"
+            ],
+            "lyric": [
+              "Paraatparam",
+              "Nir-Antaram"
             ]
           },
           "repeat": 0

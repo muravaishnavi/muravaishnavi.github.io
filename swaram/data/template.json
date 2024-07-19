@@ -1,10 +1,12 @@
 {
   "title": "",
+  "genre": "",
+  "composer": "",
   "songs": [
     {
+      "title": "",
       "raagam": "",
       "thaalam": "",
-      "composer": "",
       "arohanam": [
         "Sa",
         "Ri",
@@ -26,6 +28,19 @@
         "S"
       ],
       "swaram": [
+        {
+          "syllable": {
+            "sign": [
+              "",
+              ""
+            ],
+            "lyric": [
+              "",
+              ""
+            ]
+          },
+          "repeat": 0
+        },
         {
           "syllable": {
             "sign": [

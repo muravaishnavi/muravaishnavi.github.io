@@ -11,10 +11,7 @@
     <li><a href="index.html">Swaram</a></li>
   </nav>
   <main>
-    <div id="title"></div>
     <div id="data"></div>
-    <!-- <div id="aroavaro"></div>
-    <div id="swaram"></div> -->
   </main>
   </body>
   </html>
@@ -72,34 +69,33 @@
 
 
       const constructTable = (data) => {
-        const titleElem = document.querySelector('#title')
-        titleElem.innerHTML = [data.title]
         const dataElem = document.querySelector("#data");
         
-        let tblHeaders = null
+        let tblHeaders = [data.genre, data.title, data.composer]
         let tblValues = new Array()
         data.songs.forEach(song => {
-          tblValues.push(["Raagam", song.raagam])
-          tblValues.push(["Thaalam", song.thaalam])
-          tblValues.push(["Composer", song.composer])
-          tblValues.push(["Arohanam", song.arohanam])
-          tblValues.push(["Aarrhanam", song.avarohanam])
-          tblValues.push(["", "".padEnd(30,"-"), "".padEnd(30,"-")])
+          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_")])
+          tblValues.push(["<b>Title</b>", song.title])
+          tblValues.push(["<b>Raagam</b>", song.raagam])
+          tblValues.push(["<b>Thaalam</b>", song.thaalam])
+          tblValues.push(["<b>Arohanam</b>", song.arohanam])
+          tblValues.push(["<b>Aarrhanam</b>", song.avarohanam])
+          // tblValues.push(["".padEnd(10, "_"), "".padEnd(30,"_"), "".padEnd(30,"_")])
           song.swaram.forEach(swar => {
-            const signs = swar.syllable.sign
-            signs.unshift("Swaram")
-
-
-            const lyrics = swar.syllable.lyric
-            lyrics.unshift("Lyric")
-
+            const signs = swar.syllable.sign.map(item => {return `<b>${item}<b>`})
+            signs.unshift("<b>S</b>")
 
             if (swar.repeat > 0)
               signs.push(` (${swar.repeat}) `)
+
+            const lyrics = swar.syllable.lyric.map(item => {return `<i>${item}</i>`})
+            lyrics.unshift("<i>L</i>")
+            
             tblValues.push(signs)
             tblValues.push(lyrics)
           })
-          tblValues.push(["", "".padEnd(30, "-"), "".padEnd(30, "-")])
+          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_")])
+          // tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_")])
 
           createTable(dataElem, tblHeaders, tblValues)
         })
@@ -122,7 +118,7 @@
 
         tblHeaders.forEach(header => {
           let tblHeadCol = document.createElement('th')
-          tblHeadCol.innerText = header
+          tblHeadCol.innerHTML = header
           tblHeadRow.append(tblHeadCol)
         });
         tbl.append(tblHeadRow)
@@ -138,7 +134,7 @@
         let tblBodyRow = document.createElement('tr')
         body.forEach(value => {
           let tblBodyRowCol = document.createElement('td')
-          tblBodyRowCol.innerText = value
+          tblBodyRowCol.innerHTML = value
           tblBodyRow.append(tblBodyRowCol)
         })
         tbl.append(tblBodyRow)
