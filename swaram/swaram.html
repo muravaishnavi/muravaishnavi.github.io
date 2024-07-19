@@ -74,29 +74,27 @@
         let tblHeaders = [data.genre, data.title, data.composer]
         let tblValues = new Array()
         data.songs.forEach(song => {
-          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_")])
-          tblValues.push(["<b>Title</b>", song.title])
-          tblValues.push(["<b>Raagam</b>", song.raagam])
-          tblValues.push(["<b>Thaalam</b>", song.thaalam])
-          tblValues.push(["<b>Arohanam</b>", song.arohanam])
-          tblValues.push(["<b>Aarrhanam</b>", song.avarohanam])
+          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"), "clsRowSplit"])
+          tblValues.push(["<b>Title</b>", song.title, "clsRowInfo"])
+          tblValues.push(["<b>Raagam</b>", song.raagam, "clsRowInfo"])
+          tblValues.push(["<b>Thaalam</b>", song.thaalam, "clsRowInfo"])
+          tblValues.push(["<b>Arohanam</b>", song.arohanam, "clsRowInfo"])
+          tblValues.push(["<b>Aarrhanam</b>", song.avarohanam, "clsRowInfo"])
           // tblValues.push(["".padEnd(10, "_"), "".padEnd(30,"_"), "".padEnd(30,"_")])
           song.swaram.forEach(swar => {
             const signs = swar.syllable.sign.map(item => {return `<b>${item}<b>`})
-            signs.unshift("<b>S</b>")
-
+            signs.unshift("<b>S</b>")    // Just for Indent
+            signs.push("clsRowSwar")  // CSS Class Name for Swaram Row
             if (swar.repeat > 0)
               signs.push(` (${swar.repeat}) `)
 
             const lyrics = swar.syllable.lyric.map(item => {return `<i>${item}</i>`})
-            lyrics.unshift("<i>L</i>")
-            
+            lyrics.unshift("<i>L</i>") // Just for Indent
+            lyrics.push("clsRowLyr")
             tblValues.push(signs)
             tblValues.push(lyrics)
           })
-          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_")])
-          // tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_")])
-
+          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"),"clsRowSplit"])
           createTable(dataElem, tblHeaders, tblValues)
         })
       }
@@ -130,17 +128,17 @@
       
       
       tblValues.forEach(body => {
-        // console.log(body)
         let tblBodyRow = document.createElement('tr')
-        body.forEach(value => {
+        
+        tblBodyRow.className = body[body.length-1]
+        
+        for(let i=0; i<body.length-1; i++){
           let tblBodyRowCol = document.createElement('td')
-          tblBodyRowCol.innerHTML = value
+          tblBodyRowCol.innerHTML = body[i]
           tblBodyRow.append(tblBodyRowCol)
-        })
+        }
         tbl.append(tblBodyRow)
       })
-      
-      
       elem.append(tbl)
     }
 
