@@ -1,0 +1,45 @@
+{
+  "title": "",
+  "songs": [
+    {
+      "raagam": "",
+      "thaalam": "",
+      "composer": "",
+      "arohanam": [
+        "Sa",
+        "Ri",
+        "Ga",
+        "Ma",
+        "Pa",
+        "Da",
+        "Ni",
+        "Sa`"
+      ],
+      "avarohanam": [
+        "Sa`",
+        "Ni",
+        "Da",
+        "Pa",
+        "Ma",
+        "Ga",
+        "Ri",
+        "S"
+      ],
+      "swaram": [
+        {
+          "syllable": {
+            "sign": [
+              "",
+              ""
+            ],
+            "lyric": [
+              "",
+              ""
+            ]
+          },
+          "repeat": 0
+        }
+      ]
+    }
+  ]
+}

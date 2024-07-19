@@ -5,9 +5,7 @@
   </head>
   <body>
     <header>
-<!-- INCLUDING JQUERY-->
-<script src="https://code.jquery.com/jquery-3.5.1.js">
-</script>
+
     </header>
     <nav>
       <li><a href="../index.html">Home</a></li>
@@ -15,7 +13,8 @@
     </nav>
     <main>
       <ul>
-        <li><a id="kanmani" href="#" onclick="getSwaram(this)">Kanmani Anbodu...</a></li>
+        <li><a id="dev-gan-mudaakaraatta" href="#" onclick="Send(this)">Ganesha Pancharatnam</a></li>
+        <li><a id="mov-raja-kanmanianbodu" href="#" onclick="Send(this)">Kanmani Anbodu...</a></li>
       </ul>
       <div></div>
     </main>
@@ -23,32 +22,9 @@
 </html>
 
 <script>
-  function getSwaram(event){
-    const fileName = `${event.id}.json`
-    loadData(fileName, processData)
-  }
-
-  const loadData = (fileName, callback) => {
-      const xObj = new XMLHttpRequest();
-      xObj.overrideMimeType("application/json");
-      xObj.open('GET', fileName, true);
-      xObj.onreadystatechange = () => {
-        if (xObj.readyState === 4 && xObj.status === 200) {
-          console.log(xObj.responseText)
-          callback(xObj.responseText);
-        }
-        // else{
-        //   alert('File Not Found')
-        // }
+    function Send(event) {
+        const id = event.id
+        var url = "swaram.html?id=" + encodeURIComponent(id);
+        window.location.href = url;
       };
-      xObj.send(null);
-    }
-
-    const processData = (response) => {
-        const json = JSON.parse(response);
-        const app = document.querySelector('div');
-        app.innerHTML = `<pre>${JSON.stringify(json, null, 4)}</pre>`;
-      };
-
-      
 </script>

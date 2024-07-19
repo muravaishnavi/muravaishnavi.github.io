@@ -1,0 +1,54 @@
+{
+  "title": "Ganesha Pancharathnam",
+  "songs": [
+    {
+      "raagam": "Hamsadwani",
+      "thaalam": "",
+      "composer": "Shri. Adi Sankara",
+      "arohanam": [
+        "Sa",
+        "Ri2",
+        "Ga2",
+        "Pa",
+        "Ni2",
+        "Sa`"
+      ],
+      "avarohanam": [
+        "Sa`",
+        "Ni2",
+        "Pa",
+        "Ga2",
+        "Ri2",
+        "Sa"
+      ],
+      "swaram": [
+        {
+          "syllable": {
+            "sign": [
+              "Ga Gaa Ga Gaa Pa",
+              "Ri Ga Ri Saa"
+            ],
+            "lyric": [
+              "Mudaa-Karaatta",
+              "Modakam"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Sa Paa Pa Saa Sa",
+              "Rii Ri Rii"
+            ],
+            "lyric": [
+              "Sadaa Vimukti",
+              "Saadhakam"
+            ]
+          },
+          "repeat": 0
+        }
+      ]
+    }
+  ]
+}

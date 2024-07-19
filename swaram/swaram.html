@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <header>
+
+  </header>
+  <nav>
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="index.html">Swaram</a></li>
+  </nav>
+  <main>
+    <div id="title"></div>
+    <div id="data"></div>
+    <!-- <div id="aroavaro"></div>
+    <div id="swaram"></div> -->
+  </main>
+  </body>
+  </html>
+
+
+  
+  <script type="text/javascript">
+    var queryString = new Array();
+    window.onload = function () {
+      if (queryString.length == 0) {
+        if (window.location.search.split('?').length > 1) {
+          var params = window.location.search.split('?')[1].split('&');
+          for (var i = 0; i < params.length; i++) {
+            var key = params[i].split('=')[0];
+            var value = decodeURIComponent(params[i].split('=')[1]);
+            queryString[key] = value;
+          }
+        }
+      }
+      const id = queryString["id"] ?? 'default.json'
+      // if (queryString["id"] != null) {
+      //   localStorage.clear();
+      //   localStorage.setItem("id", queryString["id"]);
+      // }
+      getSwaram(id)
+    };
+
+
+    function getSwaram(id) {
+      const fmtId = id.replace(/-/g, "/")
+        const fileName = `data/${fmtId}.json`
+        loadData(fileName, processData)
+      }
+
+      const loadData = (fileName, callback) => {
+        const xObj = new XMLHttpRequest();
+        xObj.overrideMimeType("application/json");
+        xObj.open('GET', fileName, true);
+        xObj.onreadystatechange = () => {
+          if (xObj.readyState === 4 && xObj.status === 200) {
+            // console.log(xObj.responseText)
+            callback(xObj.responseText);
+          }
+          // else{
+          //   alert('File Not Found')
+          // }
+        };
+        xObj.send(null);
+      }
+
+      const processData = (response) => {
+        const jsonData = JSON.parse(response);
+        constructTable(jsonData)
+      };
+
+
+      const constructTable = (data) => {
+        const titleElem = document.querySelector('#title')
+        titleElem.innerHTML = [data.title]
+        const dataElem = document.querySelector("#data");
+        
+        let tblHeaders = null
+        let tblValues = new Array()
+        data.songs.forEach(song => {
+          tblValues.push(["Raagam", song.raagam])
+          tblValues.push(["Thaalam", song.thaalam])
+          tblValues.push(["Composer", song.composer])
+          tblValues.push(["Arohanam", song.arohanam])
+          tblValues.push(["Aarrhanam", song.avarohanam])
+          tblValues.push(["", "".padEnd(30,"-"), "".padEnd(30,"-")])
+          song.swaram.forEach(swar => {
+            const signs = swar.syllable.sign
+            signs.unshift("Swaram")
+
+
+            const lyrics = swar.syllable.lyric
+            lyrics.unshift("Lyric")
+
+
+            if (swar.repeat > 0)
+              signs.push(` (${swar.repeat}) `)
+            tblValues.push(signs)
+            tblValues.push(lyrics)
+          })
+          tblValues.push(["", "".padEnd(30, "-"), "".padEnd(30, "-")])
+
+          createTable(dataElem, tblHeaders, tblValues)
+        })
+      }
+
+      const createTable = (elem, tblHeaders, tblValues) => {
+      // Remove all children from Swaram Table, if any
+      while(elem.firstChild) elem.removeChild(elem.firstChild)
+
+      let tbl = document.createElement('table')
+      tbl.setAttribute('border', 0)
+      tbl.className = "tbl"
+      
+      if(tblHeaders){
+        let tblHead = document.createElement('thead')
+        tblHead.className = "tblHead"
+
+        let tblHeadRow = document.createElement('tr')
+        tblHeadRow.className = "tblHeadRow"
+
+        tblHeaders.forEach(header => {
+          let tblHeadCol = document.createElement('th')
+          tblHeadCol.innerText = header
+          tblHeadRow.append(tblHeadCol)
+        });
+        tbl.append(tblHeadRow)
+      }
+
+      let tblBody = document.createElement('tbody')
+      tblBody.className = "tblBody"
+      tbl.append(tblBody)
+      
+      
+      tblValues.forEach(body => {
+        // console.log(body)
+        let tblBodyRow = document.createElement('tr')
+        body.forEach(value => {
+          let tblBodyRowCol = document.createElement('td')
+          tblBodyRowCol.innerText = value
+          tblBodyRow.append(tblBodyRowCol)
+        })
+        tbl.append(tblBodyRow)
+      })
+      
+      
+      elem.append(tbl)
+    }
+
+  </script>
