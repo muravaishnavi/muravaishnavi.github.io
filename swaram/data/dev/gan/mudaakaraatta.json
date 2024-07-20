@@ -28,22 +28,13 @@
           "syllable": {
             "sign": [
               "Ga Gaa Ga Gaa Pa",
-              "Ri Ga Ri Saa"
-            ],
-            "lyric": [
-              "Mudaa-Karaatta",
-              "Modakam"
-            ]
-          },
-          "repeat": 0
-        },
-        {
-          "syllable": {
-            "sign": [
+              "Ri Ga Ri Saa",
               "Sa Paa Pa Saa Sa",
               "Rii Ri Rii"
             ],
             "lyric": [
+              "Mudaa-Karaatta",
+              "Modakam",
               "Sadaa Vimukti",
               "Saadhakam"
             ]
