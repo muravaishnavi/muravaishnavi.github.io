@@ -1,145 +1,164 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
   <header>
 
   </header>
-  <nav>
-    <li><a href="../index.html">Home</a></li>
-    <li><a href="index.html">Swaram</a></li>
-  </nav>
   <main>
-    <div id="data"></div>
+    <div class="container">
+      <div class="menu">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li class="active"><a href="index.html">Swaram</a></li>
+          <li class="active">Home</li>
+          <li>Contact</li>
+        </ul>
+      </div>
+      <div id="data">
+
+      </div>
+    </div>
   </main>
-  </body>
-  </html>
+</body>
+
+</html>
 
 
-  
-  <script type="text/javascript">
-    var queryString = new Array();
-    window.onload = function () {
-      if (queryString.length == 0) {
-        if (window.location.search.split('?').length > 1) {
-          var params = window.location.search.split('?')[1].split('&');
-          for (var i = 0; i < params.length; i++) {
-            var key = params[i].split('=')[0];
-            var value = decodeURIComponent(params[i].split('=')[1]);
-            queryString[key] = value;
-          }
+
+<script type="text/javascript">
+  var queryString = new Array();
+  window.onload = function () {
+    if (queryString.length == 0) {
+      if (window.location.search.split('?').length > 1) {
+        var params = window.location.search.split('?')[1].split('&');
+        for (var i = 0; i < params.length; i++) {
+          var key = params[i].split('=')[0];
+          var value = decodeURIComponent(params[i].split('=')[1]);
+          queryString[key] = value;
         }
       }
-      const id = queryString["id"] ?? 'default.json'
-      // if (queryString["id"] != null) {
-      //   localStorage.clear();
-      //   localStorage.setItem("id", queryString["id"]);
+    }
+    const id = queryString["id"] ?? 'default.json'
+    // if (queryString["id"] != null) {
+    //   localStorage.clear();
+    //   localStorage.setItem("id", queryString["id"]);
+    // }
+    getSwaram(id)
+  };
+
+
+  function getSwaram(id) {
+    const fmtId = id.replace(/-/g, "/")
+    const fileName = `data/${fmtId}.json`
+    loadData(fileName, processData)
+  }
+
+  const loadData = (fileName, callback) => {
+    const xObj = new XMLHttpRequest();
+    xObj.overrideMimeType("application/json");
+    xObj.open('GET', fileName, true);
+    xObj.onreadystatechange = () => {
+      if (xObj.readyState === 4 && xObj.status === 200) {
+        // console.log(xObj.responseText)
+        callback(xObj.responseText);
+      }
+      // else{
+      //   alert('File Not Found')
       // }
-      getSwaram(id)
     };
+    xObj.send(null);
+  }
+
+  const processData = (response) => {
+    const jsonData = JSON.parse(response);
+    constructTable(jsonData)
+  };
 
 
-    function getSwaram(id) {
-      const fmtId = id.replace(/-/g, "/")
-        const fileName = `data/${fmtId}.json`
-        loadData(fileName, processData)
-      }
+  const constructTable = (data) => {
+    const dataElem = document.querySelector("#data");
 
-      const loadData = (fileName, callback) => {
-        const xObj = new XMLHttpRequest();
-        xObj.overrideMimeType("application/json");
-        xObj.open('GET', fileName, true);
-        xObj.onreadystatechange = () => {
-          if (xObj.readyState === 4 && xObj.status === 200) {
-            // console.log(xObj.responseText)
-            callback(xObj.responseText);
-          }
-          // else{
-          //   alert('File Not Found')
-          // }
-        };
-        xObj.send(null);
-      }
-
-      const processData = (response) => {
-        const jsonData = JSON.parse(response);
-        constructTable(jsonData)
-      };
-
-
-      const constructTable = (data) => {
-        const dataElem = document.querySelector("#data");
-        
-        let tblHeaders = [data.genre, data.title, data.composer]
-        let tblValues = new Array()
-        data.songs.forEach(song => {
-          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"), "clsRowSplit"])
-          tblValues.push(["<b>Title</b>", song.title, "clsRowInfo"])
-          tblValues.push(["<b>Raagam</b>", song.raagam, "clsRowInfo"])
-          tblValues.push(["<b>Thaalam</b>", song.thaalam, "clsRowInfo"])
-          tblValues.push(["<b>Arohanam</b>", song.arohanam, "clsRowInfo"])
-          tblValues.push(["<b>Aarrhanam</b>", song.avarohanam, "clsRowInfo"])
-          // tblValues.push(["".padEnd(10, "_"), "".padEnd(30,"_"), "".padEnd(30,"_")])
-          song.swaram.forEach(swar => {
-            const signs = swar.syllable.sign.map(item => {return `<b>${item}<b>`})
-            signs.unshift("<b>S</b>")    // Just for Indent
-            signs.push("clsRowSwar")  // CSS Class Name for Swaram Row
-            if (swar.repeat > 0)
-              signs.push(` (${swar.repeat}) `)
-
-            const lyrics = swar.syllable.lyric.map(item => {return `<i>${item}</i>`})
-            lyrics.unshift("<i>L</i>") // Just for Indent
-            lyrics.push("clsRowLyr")
-            tblValues.push(signs)
-            tblValues.push(lyrics)
-          })
-          tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"),"clsRowSplit"])
-          createTable(dataElem, tblHeaders, tblValues)
-        })
-      }
-
-      const createTable = (elem, tblHeaders, tblValues) => {
-      // Remove all children from Swaram Table, if any
-      while(elem.firstChild) elem.removeChild(elem.firstChild)
-
-      let tbl = document.createElement('table')
-      tbl.setAttribute('border', 0)
-      tbl.className = "tbl"
-      
-      if(tblHeaders){
-        let tblHead = document.createElement('thead')
-        tblHead.className = "tblHead"
-
-        let tblHeadRow = document.createElement('tr')
-        tblHeadRow.className = "tblHeadRow"
-
-        tblHeaders.forEach(header => {
-          let tblHeadCol = document.createElement('th')
-          tblHeadCol.innerHTML = header
-          tblHeadRow.append(tblHeadCol)
-        });
-        tbl.append(tblHeadRow)
-      }
-
-      let tblBody = document.createElement('tbody')
-      tblBody.className = "tblBody"
-      tbl.append(tblBody)
-      
-      
-      tblValues.forEach(body => {
-        let tblBodyRow = document.createElement('tr')
-        
-        tblBodyRow.className = body[body.length-1]
-        
-        for(let i=0; i<body.length-1; i++){
-          let tblBodyRowCol = document.createElement('td')
-          tblBodyRowCol.innerHTML = body[i]
-          tblBodyRow.append(tblBodyRowCol)
+    let tblHeaders = [data.genre, data.title, data.composer]
+    let tblValues = new Array()
+    data.songs.forEach(song => {
+      // tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"), "clsSwarTblRowSplit"])
+      tblValues.push(["<b>Title</b>", song.title, "clsSwarTblRowInfo"])
+      tblValues.push(["<b>Raagam</b>", song.raagam, "clsSwarTblRowInfo"])
+      tblValues.push(["<b>Thaalam</b>", song.thaalam, "clsSwarTblRowInfo"])
+      tblValues.push(["<b>Arohanam</b>", song.arohanam, "clsSwarTblRowInfo"])
+      tblValues.push(["<b>Aarrhanam</b>", song.avarohanam, "clsSwarTblRowInfo"])
+      // tblValues.push(["".padEnd(10, "_"), "".padEnd(30,"_"), "".padEnd(30,"_")])
+      song.swaram.forEach(swar => {
+        if (swar.syllable.sign && swar.syllable.sign.length > 0) {
+          const signs = swar.syllable.sign.map(item => { return `<b>${item}<b>` })
+          signs.unshift("")    // Just for Indent
+          signs.push("clsSwarTblRowSwar")  // CSS Class Name for Swaram Row
+          if (swar.repeat > 0)
+            signs.push(` (${swar.repeat}) `)
+          tblValues.push(signs)
         }
-        tbl.append(tblBodyRow)
+
+        if (swar.syllable.lyric && swar.syllable.lyric.length > 0) {
+          const lyrics = swar.syllable.lyric.map(item => { return `<i>${item}</i>` })
+          lyrics.unshift("") // Just for Indent
+          lyrics.push("clsSwarTblRowLyr")
+
+          tblValues.push(lyrics)
+        }
+
+
       })
-      elem.append(tbl)
+      // tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"),"clsSwarTblRowSplit"])
+      createTable(dataElem, tblHeaders, tblValues)
+    })
+  }
+
+  const createTable = (elem, tblHeaders, tblValues) => {
+    // Remove all children from Swaram Table, if any
+    while (elem.firstChild) elem.removeChild(elem.firstChild)
+
+    let tbl = document.createElement('table')
+    tbl.setAttribute('border', 1)
+    tbl.className = "clsSwarTbl"
+
+    if (tblHeaders) {
+      let tblHead = document.createElement('thead')
+      tblHead.className = "clsSwarTblHead"
+
+      let tblHeadRow = document.createElement('tr')
+      tblHeadRow.className = "clsSwarTblHeadRow"
+
+      tblHeaders.forEach(header => {
+        let tblHeadCol = document.createElement('th')
+        tblHeadCol.innerHTML = header
+        tblHeadRow.append(tblHeadCol)
+      });
+      tbl.append(tblHeadRow)
     }
 
-  </script>
+    let tblBody = document.createElement('tbody')
+    tblBody.className = "clsSwarTtblBody"
+    tbl.append(tblBody)
+
+
+    tblValues.forEach(body => {
+      let tblBodyRow = document.createElement('tr')
+
+      tblBodyRow.className = body[body.length - 1]
+
+      for (let i = 0; i < body.length - 1; i++) {
+        let tblBodyRowCol = document.createElement('td')
+        tblBodyRowCol.innerHTML = body[i]
+        tblBodyRow.append(tblBodyRowCol)
+      }
+      tbl.append(tblBodyRow)
+    })
+    elem.append(tbl)
+  }
+
+</script>
