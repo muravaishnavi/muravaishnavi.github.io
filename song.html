@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+   <style>
+
+    .container {
+      width: 100%;
+      height: 100%;
+      /* background-color: #e6e7ee; */
+    }
+
+
+    .song-body {
+      display: inline-block;
+    }
+
+    .song-para {
+      display: inline-block;
+    }
+
+    /* .song-info {
+      display: block;
+    } */
+
+    .song-info p {
+      display: inline-block;
+      margin: 10px;
+      font-size: large;
+    }
+
+    .swrValues {
+    vertical-align: text-top;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px;
+    hover {
+        background-color: coral;
+    }
+    }
+
+    .swrValues p {
+        width: 150px;
+        display: inline-block;
+        margin-right: 15px;
+    }
+
+    .lyrValues {
+        text-align: left;
+        padding: 12px;
+        background-color: #f2f2f2;
+    }
+
+    .lyrValues p {
+        width: 150px;
+        display: inline-block;
+        margin-right: 15px;
+    }
+   </style>
+</head>
+
+<body>
+
+<main>
+  <a href="search.html">Home</a>
+  <div class="container">
+    <div id="data">
+
+    </div>
+  </div>
+</main>
+    
+
+</body>
+
+</html>
+
+
+
+<script type="text/javascript">
+  var queryString = new Array();
+  window.onload = function () {
+    if (queryString.length == 0) {
+      if (window.location.search.split('?').length > 1) {
+        var params = window.location.search.split('?')[1].split('&');
+        for (var i = 0; i < params.length; i++) {
+          var key = params[i].split('=')[0];
+          var value = decodeURIComponent(params[i].split('=')[1]);
+          queryString[key] = value;
+        }
+      }
+    }
+    const id = queryString["id"] ?? 'default.json'
+    // if (queryString["id"] != null) {
+    //   localStorage.clear();
+    //   localStorage.setItem("id", queryString["id"]);
+    // }
+    getSwaram(id)
+  };
+
+
+  function getSwaram(id) {
+    const fmtId = id.replace(/-/g, "/")
+    const fileName = `data/${fmtId}.json`
+    loadData(fileName, processData)
+  }
+
+  const loadData = (fileName, callback) => {
+    const xObj = new XMLHttpRequest();
+    xObj.overrideMimeType("application/json");
+    xObj.open('GET', fileName, true);
+    xObj.onreadystatechange = () => {
+      if (xObj.readyState === 4 && xObj.status === 200) {
+        // console.log(xObj.responseText)
+        callback(xObj.responseText);
+      }
+      // else{
+      //   alert('File Not Found')
+      // }
+    };
+    xObj.send(null);
+  }
+
+  const processData = (response) => {
+    const jsonData = JSON.parse(response);
+    constructTable(jsonData)
+  };
+
+
+  const constructTable = (data) => {
+    
+
+    let tblHeaders = [data.genre, data.title, data.composer]
+    let songFull = document.createElement("div")
+    songFull.className = "song-full"
+
+    data.songs.forEach(song => {
+      // tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"), "clsSwarTblRowSplit"])
+      // tblValues.push(["<b>Title</b>", song.title, "clsSwarTblRowInfo"])
+      // tblValues.push(["<b>Raagam</b>", song.raagam, "clsSwarTblRowInfo"])
+      // tblValues.push(["<b>Thaalam</b>", song.thaalam, "clsSwarTblRowInfo"])
+      // tblValues.push(["<b>Arohanam</b>", song.arohanam, "clsSwarTblRowInfo"])
+      // tblValues.push(["<b>Aarrhanam</b>", song.avarohanam, "clsSwarTblRowInfo"])
+      // tblValues.push(["".padEnd(10, "_"), "".padEnd(30,"_"), "".padEnd(30,"_")])
+      let songAttrs = document.createElement("div")
+      songAttrs.className = "song-info"
+
+      let title = document.createElement("p")
+      title.className = "song-attrs"
+      title.innerHTML = `<strong>Title:</strong> ${song.title}`
+      songAttrs.append(title)
+
+      let raagam = document.createElement("p")
+      raagam.class = "song-attrs"
+      raagam.innerHTML = `<strong>Raagam:</strong> ${song.raagam}`
+      songAttrs.append(raagam)
+
+      let thaalam = document.createElement("p")
+      thaalam.class = "song-attrs"
+      thaalam.innerHTML = `<strong>Thaalam:</strong> ${song.thaalam}`
+      songAttrs.append(thaalam)
+
+      let arohanam = document.createElement("p")
+      arohanam.class = "song-attrs"
+      arohanam.innerHTML = `<strong>Arohanam:</strong> ${song.arohanam}`
+      songAttrs.append(arohanam)
+
+      let avarohanam = document.createElement("p")
+      avarohanam.class = "song-attrs"
+      avarohanam.innerHTML = `<strong>Avarohanam:</strong> ${song.avarohanam}`
+      songAttrs.append(avarohanam)
+
+
+      // Append Song Information
+      songFull.append(songAttrs)
+
+      let songBody = document.createElement("div")
+      songBody.className = "song-body"
+
+      song.swaram.forEach(swar => {
+        let songPara = document.createElement("div")
+        songPara.className = "song-para"
+
+        let swrValues = new Array()
+        if (swar.syllable.sign && swar.syllable.sign.length > 0) {
+          const signs = swar.syllable.sign.map(item => item)
+          signs.push("swrValues")  // CSS Class Name for Swaram Row
+          if (swar.repeat > 0)
+            signs.push(` (${swar.repeat}) `)
+          swrValues.push(signs)
+          songPara.append(createBlock(null, swrValues))
+        }
+
+        let lyrValues = new Array()
+        if (swar.syllable.lyric && swar.syllable.lyric.length > 0) {
+          const lyrics = swar.syllable.lyric.map(item => item)
+          // lyrics.unshift("") // Just for Indent
+          lyrics.push("lyrValues")
+
+          lyrValues.push(lyrics)
+          songPara.append(createBlock(null, lyrValues))
+        }
+        songBody.append(songPara)
+      })
+      songFull.append(songBody)
+
+      const dataElem = document.querySelector("#data");
+      // Remove all children from Swaram Table, if any
+      while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
+      dataElem.append(songFull)
+    })
+  }
+
+  const createBlock = (tblHeaders, tblValues) => {
+    // let tbl = document.createElement('div')
+    // tbl.className = "clsSwarTbl"
+
+    let tblBodyRow = document.createElement('div')
+    tblValues.forEach(body => {
+      
+
+      tblBodyRow.className = body[body.length - 1]
+
+      for (let i = 0; i < body.length - 1; i++) {
+        let tblBodyRowCol = document.createElement('p')
+        tblBodyRowCol.innerHTML = body[i]
+        tblBodyRow.append(tblBodyRowCol)
+      }
+      // tbl.append(tblBodyRow)
+    })
+    console.log(tblBodyRow)
+    return tblBodyRow
+    // elem.append(tbl)
+  }
+
+</script>

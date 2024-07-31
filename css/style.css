@@ -5,10 +5,14 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
+html, body{
+    height: 100%;
+}
+
 .container {
     width: 100%;
     height: 100%;
-    background-color: #42455a;
+    /* background-color: #e6e7ee; */
 }
 
 .menu ul {
@@ -27,12 +31,51 @@
     color: #19dafa !important;
 }
 
+.banner{
+    width: 80%;
+    height: 70%;
+    top: 25%;
+    left: 130px;
+    position: absolute;
+    color: #fff;
+}
+
+.app-text{
+    width: 50%;
+    float: left
+}
+
+.app-text h1{
+    font-size: 43px;
+    width: 640px;
+    position: relative;
+    margin-left: 40px;
+}
+
+.app-text p {
+    font-size: 15px;
+    width: 650px;
+    margin: 30px 0 30px 40px;
+    line-height: 25px;
+    color: #1a1818;
+}
+
+.app-picture{
+    width: 50%;
+    float: right;
+}
+
+.app-picture img{
+    width: 100%;
+}
+
 table {
     font-family: 'Times New Roman', Times, serif;
     width: 100%
 }
 
 .clsSwarTbl {
+    margin: 20px 10px 20px 10px;
     border: 1px solid;
     border-collapse: collapse;
 }
@@ -60,6 +103,8 @@ td {
 }
 
 .clsSwarTblRowSwar {
+    vertical-align: text-top;
+    font-weight: bold;
     text-align: left;
     padding: 12px;
 
@@ -68,8 +113,20 @@ td {
     }
 }
 
+.clsSwarTblRowSwar p {
+    width: 300px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
 .clsSwarTblRowLyr {
     text-align: left;
     padding: 12px;
     background-color: #f2f2f2;
+}
+
+.clsSwarTblRowLyr p {
+    width: 300px;
+    display: inline-block;
+    margin-right: 15px;
 }

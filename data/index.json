@@ -1,0 +1,28 @@
+{
+  "description": "song index list",
+  "songs": [
+    {
+      "id": "dev-gan-mudaakaraatta",
+      "title": "Ganesha Pancharatnam",
+      "description": "Ganesha Pancharatnam",
+      "composer": "Adi Shankarar",
+      "tags": [
+        "mudaakaraatta",
+        "ganesha",
+        "devotional",
+        "adhi sankara"
+      ]
+    },
+    {
+      "id": "dev-swar-jatheeshwaram",
+      "title": "Jatheeshwaram",
+      "description": "Jatheeshwaram",
+      "composer": "Unknown",
+      "tags": [
+        "jatheeshwaram",
+        "devotional",
+        "swaram"
+      ]
+    }
+  ]
+}

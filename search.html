@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      input {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .song-preview li {
+        list-style: none;
+        display: inline-block;
+        margin-right: 10px;    
+        vertical-align: top;    
+      }
+
+      .song-preview-item {
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <input id="search" type="text" placeholder="Search" onkeyup="search_result()">
+    <div id="song-dashboard">
+      <ul id="song-preview" class="song-preview">
+
+      </ul>
+      <p class="song-title"></p>
+      <p class="song-composer"></p>
+    </div>
+  </body>
+</html>
+
+<script type="text/javascript">
+  let data = {}
+  window.onload = function () {
+    loadSongIndex("data/index.json", (response) => {
+      data = JSON.parse(response)
+      search_result()
+    })
+
+  }
+
+   const loadSongIndex = (fileName, callback) => {
+      const xObj = new XMLHttpRequest();
+      xObj.overrideMimeType("application/json");
+      xObj.open('GET', fileName, true);
+      xObj.onreadystatechange = () => {
+        if (xObj.readyState === 4 && xObj.status === 200) {
+          console.log(xObj.responseText)
+          callback(xObj.responseText);
+        }
+      };
+      xObj.send(null);
+    }
+
+  function search_result(){
+    console.log('invoked search')
+    console.log(data)
+    const input = document.getElementById("search").value.toLowerCase()
+    console.log('Input '+input)
+    const elemParent = document.querySelector("#song-preview")
+    
+    // Remove all children from Swaram Table, if any
+    while (elemParent.firstChild) elemParent.removeChild(elemParent.firstChild)
+
+    for(i=0; i<data.songs.length; i++){
+      let obj = data.songs[i];
+
+      if(obj.tags.findIndex((txt => txt.includes(input))) > -1 ){
+        const elemChild = document.createElement("li");
+        elemChild.innerHTML = `
+          <div class="song-preview-item">
+            <a href="song.html?id=${obj.id}">${obj.title}</a>
+              <p> ${obj.title} </p>
+              <p> ${obj.description} </p>
+              <p> ${obj.composer} </p>
+          </div>  
+            `
+        elemParent.append(elemChild)
+      }
+    }
+
+  }
+</script>
