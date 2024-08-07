@@ -11,49 +11,80 @@
       /* background-color: #e6e7ee; */
     }
 
+    .song-full{
+      background-color: gainsboro;
+      border-radius: 10px;
+      padding: 10px 20px 20px 10px;
+    }
+
+    .song-title {
+      margin: auto;
+      width: 80%;
+      font-size: 30px;
+      text-align: center;
+    }
+    .song-partial {
+      background-color: gainsboro;
+      
+    }
 
     .song-body {
-      display: inline-block;
+      display: block;
+      margin: auto;
+      width: 80%;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: rgb(189, 189, 172);
     }
 
     .song-para {
-      display: inline-block;
+      display: block;
+      
     }
 
-    /* .song-info {
+    .song-info {
       display: block;
-    } */
+      margin: auto;
+      width: 80%;;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: rgb(189, 189, 172);
+    }
 
     .song-info p {
       display: inline-block;
-      margin: 10px;
-      font-size: large;
+      margin-right: 15px;
+      /* font-size: large; */
+      width: 150px;
     }
+
+
 
     .swrValues {
     vertical-align: text-top;
     font-weight: bold;
     text-align: left;
-    padding: 12px;
-    hover {
+    padding-left: 5px;
+    background-color: beige;
+    /* hover {
         background-color: coral;
-    }
+    } */
     }
 
     .swrValues p {
-        width: 150px;
+        /* width: 150px; */
         display: inline-block;
         margin-right: 15px;
     }
 
     .lyrValues {
         text-align: left;
-        padding: 12px;
+        padding-left: 5px;
         background-color: #f2f2f2;
     }
 
     .lyrValues p {
-        width: 150px;
+        /* width: 150px; */
         display: inline-block;
         margin-right: 15px;
     }
@@ -129,51 +160,57 @@
 
 
   const constructTable = (data) => {
-    
+    const dataElem = document.querySelector("#data");
+    // Remove all children from Swaram Table, if any
+    while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
 
-    let tblHeaders = [data.genre, data.title, data.composer]
     let songFull = document.createElement("div")
     songFull.className = "song-full"
 
+    let songTitle = document.createElement("p")
+    songTitle.className = "song-title"
+    songTitle.innerText = data.title
+    songFull.append(songTitle)
+    
+
     data.songs.forEach(song => {
-      // tblValues.push(["".padEnd(10, "_"), "".padEnd(30, "_"), "".padEnd(30, "_"), "clsSwarTblRowSplit"])
-      // tblValues.push(["<b>Title</b>", song.title, "clsSwarTblRowInfo"])
-      // tblValues.push(["<b>Raagam</b>", song.raagam, "clsSwarTblRowInfo"])
-      // tblValues.push(["<b>Thaalam</b>", song.thaalam, "clsSwarTblRowInfo"])
-      // tblValues.push(["<b>Arohanam</b>", song.arohanam, "clsSwarTblRowInfo"])
-      // tblValues.push(["<b>Aarrhanam</b>", song.avarohanam, "clsSwarTblRowInfo"])
-      // tblValues.push(["".padEnd(10, "_"), "".padEnd(30,"_"), "".padEnd(30,"_")])
+      let songPartial = document.createElement("div")
+      songPartial.className = "song-partial"
+
       let songAttrs = document.createElement("div")
       songAttrs.className = "song-info"
 
       let title = document.createElement("p")
-      title.className = "song-attrs"
+      // title.className = "song-attrs"
       title.innerHTML = `<strong>Title:</strong> ${song.title}`
       songAttrs.append(title)
 
       let raagam = document.createElement("p")
-      raagam.class = "song-attrs"
+      // raagam.class = "song-attrs"
       raagam.innerHTML = `<strong>Raagam:</strong> ${song.raagam}`
       songAttrs.append(raagam)
 
       let thaalam = document.createElement("p")
-      thaalam.class = "song-attrs"
+      // thaalam.class = "song-attrs"
       thaalam.innerHTML = `<strong>Thaalam:</strong> ${song.thaalam}`
       songAttrs.append(thaalam)
 
+      let dynamics = document.createElement("div")
+      dynamics.className = "song-dyn"
+
       let arohanam = document.createElement("p")
-      arohanam.class = "song-attrs"
+      // arohanam.class = "song-attrs"
       arohanam.innerHTML = `<strong>Arohanam:</strong> ${song.arohanam}`
-      songAttrs.append(arohanam)
+      dynamics.append(arohanam)
 
       let avarohanam = document.createElement("p")
-      avarohanam.class = "song-attrs"
+      // avarohanam.class = "song-attrs"
       avarohanam.innerHTML = `<strong>Avarohanam:</strong> ${song.avarohanam}`
-      songAttrs.append(avarohanam)
-
+      dynamics.append(avarohanam)
+      songAttrs.append(dynamics)
 
       // Append Song Information
-      songFull.append(songAttrs)
+      songPartial.append(songAttrs)
 
       let songBody = document.createElement("div")
       songBody.className = "song-body"
@@ -185,9 +222,12 @@
         let swrValues = new Array()
         if (swar.syllable.sign && swar.syllable.sign.length > 0) {
           const signs = swar.syllable.sign.map(item => item)
-          signs.push("swrValues")  // CSS Class Name for Swaram Row
+          
+          //Append repeat number to the last array item
           if (swar.repeat > 0)
-            signs.push(` (${swar.repeat}) `)
+              signs.splice(signs.length - 1, 1, `${signs[signs.length-1]} (${swar.repeat})`)
+            
+          signs.push("swrValues")  // CSS Class Name for Swaram Row
           swrValues.push(signs)
           songPara.append(createBlock(null, swrValues))
         }
@@ -202,12 +242,12 @@
           songPara.append(createBlock(null, lyrValues))
         }
         songBody.append(songPara)
+        songPartial.append(songBody)
       })
-      songFull.append(songBody)
+      
+      songFull.append(songPartial)
 
-      const dataElem = document.querySelector("#data");
-      // Remove all children from Swaram Table, if any
-      while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
+      
       dataElem.append(songFull)
     })
   }
@@ -229,7 +269,7 @@
       }
       // tbl.append(tblBodyRow)
     })
-    console.log(tblBodyRow)
+    
     return tblBodyRow
     // elem.append(tbl)
   }

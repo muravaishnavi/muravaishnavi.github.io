@@ -4,7 +4,15 @@
     <style>
       input {
         display: block;
-        margin-bottom: 5px;
+        border: none;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        padding-left: 16px;
+        padding-right: 16px;
+        font-size: 16px;
+        width: 200px;
+        border-radius: 30px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
       }
 
       .song-preview li {
@@ -20,7 +28,7 @@
     </style>
   </head>
   <body>
-    <input id="search" type="text" placeholder="Search" onkeyup="search_result()">
+    <input id="search" type="text" placeholder="Search for a song" onkeyup="search_result()">
     <div id="song-dashboard">
       <ul id="song-preview" class="song-preview">
 
@@ -55,10 +63,7 @@
     }
 
   function search_result(){
-    console.log('invoked search')
-    console.log(data)
     const input = document.getElementById("search").value.toLowerCase()
-    console.log('Input '+input)
     const elemParent = document.querySelector("#song-preview")
     
     // Remove all children from Swaram Table, if any
