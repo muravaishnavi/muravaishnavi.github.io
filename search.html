@@ -2,7 +2,7 @@
 <html>
   <head>
     <style>
-      input {
+      /* input {
         display: block;
         border: none;
         padding-top: 12px;
@@ -13,14 +13,39 @@
         width: 200px;
         border-radius: 30px;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+      } */
+
+      .header {
+        background-color: rgb(120, 82, 178);
+        color: white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 15px;
+        padding-right: 15px;
       }
 
-      .song-preview li {
-        list-style: none;
-        display: inline-block;
-        margin-right: 10px;    
-        vertical-align: top;    
-      }
+    .home-link {
+      font-weight: bold;
+    }
+
+    .song-search {
+      width: 500px;
+      border: none;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      height: 30px;
+      border-radius: 15px;
+      padding-left: 20px;
+    }
+
+    .song-preview li {
+      list-style: none;
+      display: inline-block;
+      margin-right: 10px;    
+      vertical-align: top;    
+    }
 
       .song-preview-item {
         width: 100px;
@@ -28,7 +53,13 @@
     </style>
   </head>
   <body>
-    <input id="search" type="text" placeholder="Search for a song" onkeyup="search_result()">
+    <div class="header">
+      <div class="home-link">Home</div>
+      <input id="search" class="song-search" placeholder="Search" onkeyup="search_result()">
+      <!-- <button>Download</button> -->
+    </div>
+
+    <!-- <input id="search" type="text" placeholder="Search for a song" onkeyup="search_result()"> -->
     <div id="song-dashboard">
       <ul id="song-preview" class="song-preview">
 
