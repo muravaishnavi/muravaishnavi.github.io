@@ -40,12 +40,38 @@
       padding-left: 20px;
     }
 
-    .song-preview li {
-      list-style: none;
-      display: inline-block;
-      margin-right: 10px;    
-      vertical-align: top;    
+    .container {
+      margin-top: 10px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(200, 200, 200);
+      border-radius: 6px;
     }
+
+.flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.flexbox-items {
+  width: 200px;
+  background-color: rgb(162, 168, 181);
+  color: white;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 
       .song-preview-item {
         width: 100px;
@@ -60,12 +86,12 @@
     </div>
 
     <!-- <input id="search" type="text" placeholder="Search for a song" onkeyup="search_result()"> -->
-    <div id="song-dashboard">
-      <ul id="song-preview" class="song-preview">
+    <div id="container" class="container">
+      <!-- <ul id="song-preview" class="song-preview">
 
-      </ul>
-      <p class="song-title"></p>
-      <p class="song-composer"></p>
+      </ul> -->
+      <!-- <p class="song-title"></p>
+      <p class="song-composer"></p> -->
     </div>
   </body>
 </html>
@@ -95,7 +121,7 @@
 
   function search_result(){
     const input = document.getElementById("search").value.toLowerCase()
-    const elemParent = document.querySelector("#song-preview")
+    const elemParent = document.querySelector("#container")
     
     // Remove all children from Swaram Table, if any
     while (elemParent.firstChild) elemParent.removeChild(elemParent.firstChild)
@@ -104,15 +130,16 @@
       let obj = data.songs[i];
 
       if(obj.tags.findIndex((txt => txt.includes(input))) > -1 ){
-        const elemChild = document.createElement("li");
+        const elemChild = document.createElement("div");
+        elemChild.className = "flexbox";
         elemChild.innerHTML = `
-          <div class="song-preview-item">
-            <a href="song.html?id=${obj.id}">${obj.title}</a>
-              <p> ${obj.title} </p>
-              <p> ${obj.description} </p>
-              <p> ${obj.composer} </p>
-          </div>  
-            `
+        <div class = "flexbox-items">
+          <a href="song.html?id=${obj.id}">${obj.title}</a>
+          <div>${obj.title}</div>
+          <div>${obj.composer}</div>
+          <div>${obj.description}</div>
+        </div> 
+        `
         elemParent.append(elemChild)
       }
     }

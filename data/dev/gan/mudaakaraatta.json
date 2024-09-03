@@ -40,6 +40,19 @@
         {
           "syllable": {
             "sign": [
+              "",
+              ""
+            ],
+            "lyric": [
+              "",
+              ""
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
               "Sa Paa Pa Saa Sa",
               "Rii Ri Rii"
             ],
