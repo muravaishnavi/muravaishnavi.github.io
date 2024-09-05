@@ -9,7 +9,13 @@
 <body>
 
 <main>
-  <a href="search.html">Home</a>
+
+  <button id="btn-home" class="btn-style">
+    Home
+  </button>
+  <button id="btn-update" class="btn-style">
+    Update
+  </button>
   <div class="container">
     <div id="data">
 
@@ -25,6 +31,7 @@
 
 
 <script type="text/javascript">
+
   var queryString = new Array();
   window.onload = function () {
     if (queryString.length == 0) {
@@ -42,6 +49,14 @@
     //   localStorage.clear();
     //   localStorage.setItem("id", queryString["id"]);
     // }
+
+    //Set OnClick attribute to Home button
+    const btnHome = document.querySelector("#btn-home")
+    btnHome.setAttribute("onclick", `window.location.href="search.html"`)
+
+    // Set OnClick attribute to Update button
+    const btnUpdate = document.querySelector("#btn-update")
+    btnUpdate.setAttribute("onclick", `window.location.href="author.html?id=${id}"`)
     getSwaram(id)
   };
 
@@ -49,6 +64,7 @@
   function getSwaram(id) {
     const fmtId = id.replace(/-/g, "/")
     const fileName = `data/${fmtId}.json`
+
     loadData(fileName, processData)
   }
 

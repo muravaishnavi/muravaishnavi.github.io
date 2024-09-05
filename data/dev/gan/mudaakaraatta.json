@@ -2,6 +2,7 @@
   "title": "Ganesha Pancharathnam",
   "genre": "Devotional",
   "composer": "Shri. Adi Sankara",
+  "album": "Ganeshan",
   "songs": [
     {
       "title": "Song#1",
@@ -35,20 +36,7 @@
               "Modakam"
             ]
           },
-          "repeat": 0
-        },
-        {
-          "syllable": {
-            "sign": [
-              "",
-              ""
-            ],
-            "lyric": [
-              "",
-              ""
-            ]
-          },
-          "repeat": 0
+          "repeat": 2
         },
         {
           "syllable": {
