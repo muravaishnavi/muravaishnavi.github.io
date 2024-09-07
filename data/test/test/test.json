@@ -1,0 +1,31 @@
+{
+  "title": "test",
+  "genre": "test",
+  "composer": "test",
+  "album": "test",
+  "songs": [
+    {
+      "title": "",
+      "raagam": "test",
+      "thaalam": "test",
+      "arohanam": "test",
+      "avarohanam": "test",
+      "swaram": [
+        {
+          "syllable": {
+            "sign": [
+              "test",
+              "test"
+            ],
+            "lyric": [
+              "test",
+              "test"
+            ]
+          },
+          "repeat": "2"
+        }
+      ]
+    }
+  ],
+  "id": "test-test-test"
+}

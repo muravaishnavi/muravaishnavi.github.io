@@ -170,6 +170,7 @@
 
 .btn-style {
     background-color: rgb(29, 155, 240);
+    text-decoration: none;
     color: white;
     border: none;
     padding-top: 8px;

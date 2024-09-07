@@ -19,32 +19,9 @@
         Save
       </button>
       <div id="data">
-        <!-- <label for="title">Tile:</label>
-        <input type="text" id="title" name="title">
-        <br>
-        <label for="genre">Genre:</label>
-        <input type="genre" id="genre" name="genre">
-        <br>
-        <label for="swaram">Swaram:</label>
-        <textarea id="swaram" name="Swaram" rows="4" cols="50"></textarea>
-        <br>
-        <button type="submit" onclick="UpdateSong()">Submit</button> -->
       </div>
     </div>
   </main>
-  <!-- <form id="myForm">
-    <label for="title">Tile:</label>
-    <input type="text" id="title" name="title">
-    <br>
-    <label for="genre">Genre:</label>
-    <input type="genre" id="genre" name="genre">
-    <br>
-    <label for="swaram">Swaram:</label>
-    <textarea id="swaram" name="Swaram" rows="4" cols="50"></textarea>
-    <br>
-    <button type="submit" onclick="UpdateSong()">Submit</button>
-  </form> -->
-
   <script>
 
     window.addEventListener("DOMContentLoaded", () => {
@@ -55,7 +32,7 @@
 
       //Set OnClick attribute to Home button
       const btnHome = document.querySelector("#btn-home")
-      btnHome.setAttribute("onclick", `window.location.href="search.html"`)
+      btnHome.setAttribute("onclick", `window.location.href="index.html"`)
 
       // Set OnClick attribute to Save button
       const btnSave = document.querySelector("#btn-save")
@@ -63,32 +40,31 @@
       btnSave.setAttribute("onclick", `persistSongChanges()`)
 
       if (songId) {
-        getSwaram(songId)
+        const fmtId = songId.replace(/-/g, "/")
+        const fileName = `data/${fmtId}.json`
+        loadData(fileName, processData)
+      }
+      else{
+        loadData("data/schema.json", processData)
       }
 
     });
 
-     function getSwaram(id) {
-        const fmtId = id.replace(/-/g, "/")
-        const fileName = `data/${fmtId}.json`
-        loadData(fileName, processData)
-      }
-
-      const loadData = (fileName, callback) => {
-        const xObj = new XMLHttpRequest();
-        xObj.overrideMimeType("application/json");
-        xObj.open('GET', fileName, true);
-        xObj.onreadystatechange = () => {
-          if (xObj.readyState === 4 && xObj.status === 200) {
-            // console.log(xObj.responseText)
-            callback(xObj.responseText);
-          }
-          // else{
-          //   alert('File Not Found')
-          // }
-        };
-        xObj.send(null);
-      }
+    const loadData = (fileName, callback) => {
+      const xObj = new XMLHttpRequest();
+      xObj.overrideMimeType("application/json");
+      xObj.open('GET', fileName, true);
+      xObj.onreadystatechange = () => {
+        if (xObj.readyState === 4 && xObj.status === 200) {
+          // console.log(xObj.responseText)
+          callback(xObj.responseText);
+        }
+        // else{
+        //   alert('File Not Found')
+        // }
+      };
+      xObj.send(null);
+    }
 
       const processData = (response) => {
         localStorage.setItem("song", response);
@@ -117,13 +93,16 @@
             let songStanza = document.createElement("div")
             songStanza.className = "song-stanza"
             // add Song Metadata
-            songStanza.append(addSongMetadata(song))
+            songStanza.append(addSongMetadata(index, song))
             // const index = data.songs.indexOf(song)
             let songBody = addSongBody(song, index)
             songStanza.append(songBody)
             songFull.append(songStanza)
             dataElem.append(songFull)
           })
+
+          //Add Song Tags
+
         }
 
         
@@ -131,42 +110,46 @@
           let elemBlock = document.createElement("div")
           elemBlock.className = "song-title-block"
 
-          const titleElem = renderSongMetadata({ id: "title", title: "Title: ", value: song.title, className: "song-title" })
+          const titleElem = renderSongMetadata(null, { id: "title", title: "Title: ", value: song.title, className: "song-title" })
           elemBlock.append(titleElem)
 
-          const genreElem = renderSongMetadata({ id: "genre", title: "Genre: ", value: song.genre, className: "song-title" })
+          const genreElem = renderSongMetadata(null, { id: "genre", title: "Genre: ", value: song.genre, className: "song-title" })
           elemBlock.append(genreElem)
 
-          const composerElem = renderSongMetadata({ id: "composer", title: "Composer: ", value: song.composer, className: "song-title" })
+          const composerElem = renderSongMetadata(null, { id: "composer", title: "Composer: ", value: song.composer, className: "song-title" })
           elemBlock.append(composerElem)
+
+          const albumElem = renderSongMetadata(null, { id: "album", title: "Album: ", value: song.album, className: "song-title" })
+          elemBlock.append(albumElem)
+
           return elemBlock
         }
 
-        const addSongMetadata = (song) => {
+        const addSongMetadata = (index, song) => {
           let elemBlock = document.createElement("div")
           elemBlock.className = "song-metadata-block"
 
           // Song Raagam
-          const raagamElem = renderSongMetadata({ id: "raagam", title: "Raagam: ", value: song.raagam, className: "song-metadata" })
+          const raagamElem = renderSongMetadata(index, { id: "raagam", title: "Raagam: ", value: song.raagam, className: "song-metadata" })
           elemBlock.append(raagamElem)
 
           // Song Thaalam
-          const thaalamElem = renderSongMetadata({ id: "thalam", title: "Thalam: : ", value: song.thaalam, className: "song-metadata" })
+          const thaalamElem = renderSongMetadata(index, { id: "thaalam", title: "Thaalam: ", value: song.thaalam, className: "song-metadata" })
           elemBlock.append(thaalamElem)
 
           // Song Arohanam
-          const arohanamElem = renderSongMetadata({ id: "arrohanam", title: "Arohanam: ", value: song.avarohanam, className: "song-metadata" })
+          const arohanamElem = renderSongMetadata(index, { id: "arohanam", title: "Arohanam: ", value: song.arohanam, className: "song-metadata" })
           elemBlock.append(arohanamElem)
 
           // Song Avarohanam
-          const avarohanamElem = renderSongMetadata({ id: "avarohanam", title: "Avarohanam: ", value: song.avarohanam, className: "song-metadata" })
+          const avarohanamElem = renderSongMetadata(index, { id: "avarohanam", title: "Avarohanam: ", value: song.avarohanam, className: "song-metadata" })
           elemBlock.append(avarohanamElem)
           
           
           return elemBlock
         }
 
-        const renderSongMetadata = (obj) => {
+        const renderSongMetadata = (songIndex, obj) => {
           let metaBlock = document.createElement("div")
           metaBlock.className = obj.className
           let metaLbl = document.createElement("label")
@@ -174,12 +157,18 @@
           metaLbl.innerHTML = obj.title
           let metaVal = document.createElement("input")
           metaVal.type = "text"
-          metaVal.id = obj.id
+          metaVal.name = obj.id
           metaVal.value = obj.value
+
+          metaVal.addEventListener("focusout", (event) => {
+          const val = event.target.value
+          const type = event.target.name
+          syncUpdate(songIndex, null, null, type, val)
+        });
+
           metaBlock.append(metaLbl, metaVal)
           return metaBlock
         }
-
 
         /**
          * Add Song Paragraph
@@ -213,14 +202,6 @@
 
             // Repeat Number
             const repeatElem = renderValBlock("repeat", songIndex, swarIndex, null, swar.repeat, "swrRepeat-input")
-            // const repeatElem = document.createElement("input")
-            // repeatElem.type = "text"
-            // repeatElem.setAttribute("maxlength", "2");
-            // repeatElem.name = "repeat"
-            // repeatElem.className = "swrRepeat-input"
-            // repeatElem.value = swar.repeat
-
-            // icons.append(addIconElem);
             songPara.append(addIconElem, remIconElem, repeatElem)
 
 
@@ -228,10 +209,6 @@
             // let swrValues = new Array()
             if (swar.syllable.sign && swar.syllable.sign.length > 0) {
               const signs = swar.syllable.sign.map(item => item)
-              //Append repeat number to the last array item
-              // if (swar.repeat > 0)
-              //   signs.splice(signs.length - 1, 1, `${signs[signs.length - 1]} (${swar.repeat})`)
-              // swrValues.push(signs)
               const attrs = {type: "sign", className: "swrValues" }
               songPara.append(renderSwarBlock(songIndex, swarIndex, signs, attrs))
             }
@@ -327,32 +304,46 @@
         let data = localStorage.getItem("song");
         
         if (data) {
-          data.id = `${data.genre}-${data.album}-${data.title}`.trim().replace(/\s+/g, '-').toLowerCase()
           const parsedData = JSON.parse(data);
-          if(type === "sign")
-            parsedData.songs[songIndex].swaram[swarIndex].syllable.sign[valIndex] = value
-          else if(type === "lyric")
-            parsedData.songs[songIndex].swaram[swarIndex].syllable.lyric[valIndex] = value
+          
+          if(type === "sign" || type === "lyric")
+            parsedData.songs[songIndex].swaram[swarIndex].syllable[type][valIndex] = value
           else if(type === "repeat")
-            parsedData.songs[songIndex].swaram[swarIndex].repeat = value
+            parsedData.songs[songIndex].swaram[swarIndex][type] = value
+          // Metadata processing
+          else{
+            // Song Stanza Metadata
+            if(songIndex != null){
+               parsedData.songs[songIndex][type] = value
+            }
+            // Song Metadata
+            else {
+              parsedData[type] = value
+            }
+          }
+          // Add ID to parsed Data
+          parsedData.id = `${parsedData.genre}-${parsedData.album}-${parsedData.title}`.trim().replace(/\s+/g, '-').toLowerCase();
           const updatedData = JSON.stringify(parsedData)
-          console.log(updatedData)
+          // console.log(updatedData)
           processData(updatedData)
         }
       }
 
       const persistSongChanges = () => {
         let data = localStorage.getItem("song");
+        const parsedData = JSON.parse(data);
         if(data){
-            const jsonData = JSON.stringify(data);
+            const jsonData = JSON.stringify(parsedData);
             const blob = new Blob([jsonData], { type: "application/json" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = data.id;
+            a.download = `${parsedData.id}.json`;
             a.click();
         }
       }
+
+      
 
 
   </script>

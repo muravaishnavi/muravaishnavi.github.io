@@ -1,7 +1,14 @@
 {
-  "title": "Jatheeshwaram",
-  "genre": "Devitional",
-  "composer": "Unknown",
+  "id": "devotional-jatheeshwaram-gambeeranattai",
+  "title": "Gambeera Nattai",
+  "genre": "Devotional",
+  "composer": "NA",
+  "album": "Jatheeshwaram",
+  "tags": [
+    "jatheeshwaram",
+    "gambeeranattai",
+    "devotional"
+  ],
   "songs": [
     {
       "title": "Jatheeshwaram",

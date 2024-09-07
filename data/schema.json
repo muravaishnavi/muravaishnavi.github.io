@@ -1,0 +1,29 @@
+{
+  "title": "",
+  "genre": "",
+  "composer": "",
+  "album": "",
+  "tags": [],
+  "songs": [
+    {
+      "title": "",
+      "raagam": "",
+      "thaalam": "",
+      "arohanam": [],
+      "avarohanam": [],
+      "swaram": [
+        {
+          "syllable": {
+            "sign": [
+              ""
+            ],
+            "lyric": [
+              ""
+            ]
+          },
+          "repeat": 0
+        }
+      ]
+    }
+  ]
+}

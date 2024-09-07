@@ -1,8 +1,15 @@
 {
+  "id": "devotional-ganesan-ganeshapancharathnam",
   "title": "Ganesha Pancharathnam",
   "genre": "Devotional",
   "composer": "Shri. Adi Sankara",
   "album": "Ganeshan",
+  "tags": [
+    "mudaakaraatta",
+    "ganesha",
+    "devotional",
+    "adhi sankara"
+  ],
   "songs": [
     {
       "title": "Song#1",
