@@ -1,9 +1,25 @@
+p {
+    font-family: Arial;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .container {
-    width: 100%;
+    width: 90%;
     height: 100%;
     border-radius: 10px;
     padding-left: 15px;
     padding-right: 15px;
+    align-items: center;
     /* margin: 10px; */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
@@ -12,6 +28,7 @@
 
 .header {
     background-color: rgb(120, 82, 178);
+    width: 90%;
     height: 50px;
     margin-top: 12px;
     margin-bottom: 12px;
@@ -35,16 +52,26 @@
     padding-left: 15px;
     padding-right: 15px;
  }
- s
+ 
 .song-full {
     background-color: gainsboro;
     border-radius: 10px;
     padding: 10px 20px 20px 10px;
 }
 
+.song-index {
+    background-color: gainsboro;
+    border-radius: 10px;
+    padding: 10px 20px 20px 10px;
+}
+
 .song-title-block {
-    display: block;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 12px;
+    margin-bottom: 12px;
     /* width: 80%; */
     padding: 10px;
     border-radius: 10px;
@@ -54,8 +81,9 @@
 }
 
 .song-title {
-    /* display: inline-block; */
-    margin: auto;
+    display: flex;
+    align-items: center;
+    margin: 0px 0px 0px 0px;
     width: auto;
     padding: 10px;
     border-radius: 10px;
@@ -70,10 +98,18 @@
     font-size: large;
 }
 
+.song-title p {
+    background-color: transparent;
+    border: none;
+    width: fit-content;
+    padding: 0px;
+    margin: 0px 0px 0px 10px;
+    font-size: large;
+}
+
 .song-metadata-block {
     display: block;
     margin: auto;
-    /* width: 80%; */
     padding: 10px;
     border-radius: 10px;
     background-color: rgb(189, 189, 172);
@@ -100,13 +136,14 @@
 .song-metadata p {
     display: inline-block;
     margin-right: 15px;
-    /* font-size: large; */
-    width: 150px;
+    width: fit-content;
+    padding: 0px;
+    margin: 0px 0px 0px 10px;
+    
 }
 
 .song-instance {
     background-color: gainsboro;
-
 }
 
 .song-body {

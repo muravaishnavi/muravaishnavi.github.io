@@ -3,68 +3,31 @@
   <head>
     <link rel="stylesheet" href="css/style.css">
     <style>
-      /* input {
-        display: block;
-        border: none;
-        padding-top: 12px;
-        padding-bottom: 12px;
-        padding-left: 16px;
-        padding-right: 16px;
-        font-size: 16px;
-        width: 200px;
-        border-radius: 30px;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
-      } */
-/* 
-      .header {
-        background-color: rgb(120, 82, 178);
-        color: white;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-left: 15px;
-        padding-right: 15px;
-      } */
-
-    /* .home-link {
-      font-weight: bold;
+    /* .song-index {
+      display: block
     } */
-
-   
-
-    /* .container {
-      margin-top: 10px;
-      border-width: 1px;
-      border-style: solid;
-      border-color: rgb(200, 200, 200);
-      border-radius: 6px;
-    } */
-
-    .flexbox {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 6px;
-      padding-bottom: 6px;
-      padding-left: 12px;
-      padding-right: 12px;
+    .song-grid {
+      width: 200px;
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
+      display: inline-block;
+      vertical-align: top;
+      margin: 15px 15px 15px 15px;
     }
 
-    .flexbox-items {
+    .song-grid-items {
       width: 200px;
       background-color: rgb(162, 168, 181);
       color: white;
-      padding-top: 3px;
-      padding-bottom: 3px;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding: 3px 10px 3px 10px;
       border-radius: 20px;
       font-size: 14px;
       font-weight: bold;
+      
     }
-
+    .song-grid-items:hover {
+      cursor: pointer;
+      background-color: rgb(128, 128, 128);
+      }
 
       .song-preview-item {
         width: 100px;
@@ -72,85 +35,104 @@
     </style>
   </head>
   <body>
-    <div class="header">
-      <a href="index.html" class="btn-style">Home</a>
-      <a href="compose.html" class="btn-style">Compose</a>
-      <input id="search" class="song-search" placeholder="Search" onkeyup="search_result()">
-    </div>
-    <div id="container" class="container">
+    <div class="body">
+      <div class="header">
+        <a href="index.html" class="btn-style">Home</a>
+        <a href="compose.html" class="btn-style">Compose</a>
+        <input id="search" class="song-search" placeholder="Search" onkeyup="search_result()">
+      </div>
+        <div id="container" class="container">
+        </div>
     </div>
   </body>
 </html>
 
 <script type="text/javascript">
-  let data = {}
+  // let data = {}
   window.onload = function () {
      // Call the function with the desired path
-    iterateSongs('/data/');
-    loadSongIndex("data/index.json", (response) => {
-      data = JSON.parse(response)
-      search_result()
-    })
+    // iterateSongs('/data/');
+    loadData("data/index.json", processData)
   }
 
+  const processData = (response) => {
+      localStorage.setItem("song", response);
+      const jsonData = JSON.parse(response);
+      // search_result(jsonData)
+      renderElem(jsonData)
+    };
 
-  function iterateSongs(path) {
-      // Assuming you are running this code in a browser environment
-      // You can use the Fetch API to retrieve the list of files in the given path
-      fetch(path)
-        .then(response => response.text())
-        .then(data => {
-          // Split the data into an array of file names
-          const fileNames = data.split('\n');
+  
 
-          // Iterate over each file name
-          fileNames.forEach(fileName => {
-            // Check if the file has a .txt extension
-            if (fileName.endsWith('.txt')) {
-              // Perform your desired operations on the text file here
-              console.log(`Processing file: ${fileName}`);
-            }
-          });
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-    }
-
-   
-
-   const loadSongIndex = (fileName, callback) => {
+   const loadData = (fileName, callback) => {
       const xObj = new XMLHttpRequest();
       xObj.overrideMimeType("application/json");
       xObj.open('GET', fileName, true);
       xObj.onreadystatechange = () => {
         if (xObj.readyState === 4 && xObj.status === 200) {
-          console.log(xObj.responseText)
           callback(xObj.responseText);
         }
       };
       xObj.send(null);
     }
 
-  function search_result(){
+
+    const renderElem = (songIndex) => {
+      const dataElem = document.querySelector("#container")
+
+      // Remove all child elements, if any
+      while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
+
+      
+
+      songIndex.forEach((song, index) => {
+        const grid = document.createElement("div");
+        grid.className = "song-grid";
+        grid.append(renderBox(song));
+        dataElem.append(grid);
+      });
+      
+    }
+
+    const renderBox = (song) => {
+      const box = document.createElement("div");
+      box.className = "song-grid-items";
+      box.append(renderItem(song.title));
+      box.append(renderItem(song.genre));
+      box.append(renderItem(song.composer));
+      box.append(renderItem(song.album));
+      box.onclick = function() {
+        window.location.href = `view.html?id=${song.id}`;
+      };
+      return box;
+    }
+
+    const renderItem = (item) => {
+      const itemElem = document.createElement("p");
+      itemElem.innerText = item;
+      return itemElem;
+    }
+
+  function search_result(data){
+
     const input = document.getElementById("search").value.toLowerCase()
     const elemParent = document.querySelector("#container")
     
     // Remove all children from Swaram Table, if any
     while (elemParent.firstChild) elemParent.removeChild(elemParent.firstChild)
 
-    for(i=0; i<data.songs.length; i++){
-      let obj = data.songs[i];
+    for(i=0; i<data.length; i++){
+      let obj = data[i];
 
-      if(obj.tags.findIndex((txt => txt.includes(input))) > -1 ){
+      if(obj.tag && obj.tag.findIndex((txt => txt.includes(input))) > -1 ){
         const elemChild = document.createElement("div");
         elemChild.className = "flexbox";
         elemChild.innerHTML = `
         <div class = "flexbox-items">
           <a href="view.html?id=${obj.id}">${obj.title}</a>
-          <div>${obj.title}</div>
+          <div>${obj.genre}</div>
           <div>${obj.composer}</div>
-          <div>${obj.description}</div>
+          <div>${obj.album}</div>
         </div> 
         `
         elemParent.append(elemChild)

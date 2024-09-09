@@ -1,212 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
   <link rel="stylesheet" href="css/style.css">
-
+  <link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">
 </head>
 
 <body>
-
-<main>
-
-  <button id="btn-home" class="btn-style">
-    Home
-  </button>
-  <button id="btn-update" class="btn-style">
-    Update
-  </button>
-  <div class="container">
-    <div id="data">
-
-    </div>
+<div class="body">
+  <div class="header">
+    <!-- <button id="btn-home" class="btn-style" onclick="window.location.href='index.html'">
+          Home
+        </button> -->
+    <a href="index.html" class="btn-style">Home</a>
+    <a href="#" onclick="window.print()" class="btn-style">Print</a>
   </div>
-</main>
-    
+  
+  <div id="container" class="container">
+  
+  </div>
+</div>
+ 
 
-</body>
+  <script>
 
-</html>
+    window.addEventListener("DOMContentLoaded", () => {
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const songId = urlParams.get("id");
+      const genreParam = urlParams.get("genre");
 
+      if (songId) {
+        const fmtId = songId.replace(/-/g, "/")
+        const fileName = `data/${fmtId}.json`
+        loadData(fileName, processData)
+      }
+      else {
+        loadData("data/schema.json", processData)
+      }
 
+    });
 
-<script type="text/javascript">
-
-  var queryString = new Array();
-  window.onload = function () {
-    if (queryString.length == 0) {
-      if (window.location.search.split('?').length > 1) {
-        var params = window.location.search.split('?')[1].split('&');
-        for (var i = 0; i < params.length; i++) {
-          var key = params[i].split('=')[0];
-          var value = decodeURIComponent(params[i].split('=')[1]);
-          queryString[key] = value;
+    const loadData = (fileName, callback) => {
+      const xObj = new XMLHttpRequest();
+      xObj.overrideMimeType("application/json");
+      xObj.open('GET', fileName, true);
+      xObj.onreadystatechange = () => {
+        if (xObj.readyState === 4 && xObj.status === 200) {
+          callback(xObj.responseText);
         }
-      }
+        else{
+          console.log('File Not Found')
+        }
+      };
+      xObj.send(null);
     }
-    const id = queryString["id"] ?? 'default.json'
-    // if (queryString["id"] != null) {
-    //   localStorage.clear();
-    //   localStorage.setItem("id", queryString["id"]);
-    // }
 
-    //Set OnClick attribute to Home button
-    const btnHome = document.querySelector("#btn-home")
-    btnHome.setAttribute("onclick", `window.location.href="index.html"`)
-
-    // Set OnClick attribute to Update button
-    const btnUpdate = document.querySelector("#btn-update")
-    btnUpdate.setAttribute("onclick", `window.location.href="compose.html?id=${id}"`)
-    getSwaram(id)
-  };
-
-
-  function getSwaram(id) {
-    const fmtId = id.replace(/-/g, "/")
-    const fileName = `data/${fmtId}.json`
-
-    loadData(fileName, processData)
-  }
-
-  const loadData = (fileName, callback) => {
-    const xObj = new XMLHttpRequest();
-    xObj.overrideMimeType("application/json");
-    xObj.open('GET', fileName, true);
-    xObj.onreadystatechange = () => {
-      if (xObj.readyState === 4 && xObj.status === 200) {
-        // console.log(xObj.responseText)
-        callback(xObj.responseText);
-      }
-      // else{
-      //   alert('File Not Found')
-      // }
+    const processData = (response) => {
+      localStorage.setItem("song", response);
+      const jsonData = JSON.parse(response);
+      renderElem(jsonData)
     };
-    xObj.send(null);
-  }
 
-  const processData = (response) => {
-    const jsonData = JSON.parse(response);
-    constructTable(jsonData)
-  };
+    /**
+     * Render Element
+     * @param {Object} data
+     */
+
+    const renderElem = (data) => {
+      // Set window title to song title
+      document.title = data.title;
+      // console.log(data)
+      const dataElem = document.querySelector("#container");
+      // Remove all children from Swaram Table, if any
+      while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
+
+      let songFull = document.createElement("div")
+      songFull.className = "song-full"
+
+      // add title block
+      songFull.append(addSongTitle(data))
+
+      data.song.forEach((song, index) => {
+        let songInstance = document.createElement("div")
+        songInstance.className = "song-instance"
+        // add Song Metadata
+        songInstance.append(addSongMetadata(index, song))
+        // const index = data.songs.indexOf(song)
+
+        let songBody = addSongStanza(song, index)
+        songInstance.append(songBody)
+        songFull.append(songInstance)
+        dataElem.append(songFull)
+      })
+
+      //Add Song Tags
+
+    }
 
 
-  const constructTable = (data) => {
-    const dataElem = document.querySelector("#data");
-    // Remove all children from Swaram Table, if any
-    while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
+    const addSongTitle = (song) => {
+      let elemBlock = document.createElement("div")
+      elemBlock.className = "song-title-block"
 
-    let songFull = document.createElement("div")
-    songFull.className = "song-full"
+      const titleElem = renderSongMetadata(null, { id: "title", title: "Title: ", value: song.title, className: "song-title" })
+      elemBlock.append(titleElem)
 
-    let titleHolder = document.createElement("div")
-    titleHolder.className = "song-partial"
+      const genreElem = renderSongMetadata(null, { id: "genre", title: "Genre: ", value: song.genre, className: "song-title" })
+      elemBlock.append(genreElem)
+
+      const composerElem = renderSongMetadata(null, { id: "composer", title: "Composer: ", value: song.composer, className: "song-title" })
+      elemBlock.append(composerElem)
+
+      const albumElem = renderSongMetadata(null, { id: "album", title: "Album: ", value: song.album, className: "song-title" })
+      elemBlock.append(albumElem)
+
+      return elemBlock
+    }
+
+    const addSongMetadata = (index, song) => {
+      let elemBlock = document.createElement("div")
+      elemBlock.className = "song-metadata-block"
+
+      // Song Raagam
+      const raagamElem = renderSongMetadata(index, { id: "raagam", title: "Raagam: ", value: song.raagam, className: "song-metadata" })
+      elemBlock.append(raagamElem)
+
+      // Song Thaalam
+      const thaalamElem = renderSongMetadata(index, { id: "thaalam", title: "Thaalam: ", value: song.thaalam, className: "song-metadata" })
+      elemBlock.append(thaalamElem)
+
+      // Song Arohanam
+      const arohanamElem = renderSongMetadata(index, { id: "arohanam", title: "Arohanam: ", value: song.arohanam, className: "song-metadata" })
+      elemBlock.append(arohanamElem)
+
+      // Song Avarohanam
+      const avarohanamElem = renderSongMetadata(index, { id: "avarohanam", title: "Avarohanam: ", value: song.avarohanam, className: "song-metadata" })
+      elemBlock.append(avarohanamElem)
 
 
-    let songTitle = document.createElement("p")
-    songTitle.className = "song-title"
-    songTitle.innerText = data.title
-    titleHolder.append(songTitle)
-    songFull.append(titleHolder)
+      return elemBlock
+    }
 
-    data.songs.forEach(song => {
-      let songPartial = document.createElement("div")
-      songPartial.className = "song-partial"
+    const renderSongMetadata = (songIndex, obj) => {
+      let metaBlock = document.createElement("div")
+      metaBlock.className = obj.className
+      let metaLbl = document.createElement("label")
+      metaLbl.for = obj.name
+      metaLbl.innerHTML = obj.title
+      let metaVal = document.createElement("p")
+      metaVal.innerText = obj.value
 
-      let songAttrs = document.createElement("div")
-      songAttrs.className = "song-info"
+      metaBlock.append(metaLbl, metaVal)
+      return metaBlock
+    }
 
-      let title = document.createElement("p")
-      // title.className = "song-attrs"
-      title.innerHTML = `<strong>Title:</strong> ${song.title}`
-      songAttrs.append(title)
-
-      let raagam = document.createElement("p")
-      // raagam.class = "song-attrs"
-      raagam.innerHTML = `<strong>Raagam:</strong> ${song.raagam}`
-      songAttrs.append(raagam)
-
-      let thaalam = document.createElement("p")
-      // thaalam.class = "song-attrs"
-      thaalam.innerHTML = `<strong>Thaalam:</strong> ${song.thaalam}`
-      songAttrs.append(thaalam)
-
-      let dynamics = document.createElement("div")
-      dynamics.className = "song-dyn"
-
-      let arohanam = document.createElement("p")
-      // arohanam.class = "song-attrs"
-      arohanam.innerHTML = `<strong>Arohanam:</strong> ${song.arohanam}`
-      dynamics.append(arohanam)
-
-      let avarohanam = document.createElement("p")
-      // avarohanam.class = "song-attrs"
-      avarohanam.innerHTML = `<strong>Avarohanam:</strong> ${song.avarohanam}`
-      dynamics.append(avarohanam)
-      songAttrs.append(dynamics)
-
-      // Append Song Information
-      songPartial.append(songAttrs)
-
+    /**
+     * Add Song Paragraph
+     * @param {Object} song
+     * @param {Number} songIndex
+     */
+    const addSongStanza = (song, songIndex) => {
       let songBody = document.createElement("div")
       songBody.className = "song-body"
 
-      song.swaram.forEach(swar => {
-        let songPara = document.createElement("div")
-        songPara.className = "song-para"
+      song.stanza.forEach((stz, stzIndex) => {
+        let songStanza = document.createElement("div")
+        songStanza.className = "song-stanza"
 
-        let swrValues = new Array()
-        if (swar.syllable.sign && swar.syllable.sign.length > 0) {
-          const signs = swar.syllable.sign.map(item => item)
-          
-          //Append repeat number to the last array item
-          if (swar.repeat > 0)
-              signs.splice(signs.length - 1, 1, `${signs[signs.length-1]} (${swar.repeat})`)
-            
-          signs.push("swrValues")  // CSS Class Name for Swaram Row
-          swrValues.push(signs)
-          songPara.append(createBlock(null, swrValues))
-        }
+        stz.swaram.forEach((swrVal, swrIndex) => {
+          const swrAttrs = { field: "swaram", className: "swrValues" }
+          songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
 
-        let lyrValues = new Array()
-        if (swar.syllable.lyric && swar.syllable.lyric.length > 0) {
-          const lyrics = swar.syllable.lyric.map(item => item)
-          // lyrics.unshift("") // Just for Indent
-          lyrics.push("lyrValues")
+          const lyrAttrs = { field: "lyric_en", className: "lyrValues" }
+          songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs))
+          songBody.append(songStanza)
+        })
+        // const swrAttrs = { type: "sign", className: "swrValues" }
+        // songStanza.append(renderSwarBlock(songIndex, stzIndex, stz.swaram, swrAttrs))
 
-          lyrValues.push(lyrics)
-          songPara.append(createBlock(null, lyrValues))
-        }
-        songBody.append(songPara)
-        songPartial.append(songBody)
+        // const lyrAttrs = { type: "lyric", className: "lyrValues" }
+        // songStanza.append(renderSwarBlock(songIndex, stzIndex, stz.lyric, lyrAttrs))
+        songBody.append(songStanza)
       })
-      
-      songFull.append(songPartial)
+      return songBody
+    }
 
-      
-      dataElem.append(songFull)
-    })
-  }
+    /**
+     * Add Song Swar Element Block
+     * @param {Object} song
+     * @param {Number} songIndex
+     */
+    const renderSwarBlock = (songIndex, stzIndex, swrIndex, val, attrs) => {
+      let elemBlock = document.createElement('div')
+      elemBlock.className = attrs.className
+      elemBlock.append(renderValBlock(songIndex, stzIndex, swrIndex, attrs.field, val))
+      return elemBlock
+    }
 
-  const createBlock = (tblHeaders, tblValues) => {
-    // let tbl = document.createElement('div')
-    // tbl.className = "clsSwarTbl"
+    /**
+     * Add Element Block to Swaram & Lyric
+     * @param {HTMLElement} elem
+     * @param {Array} obj
+     * @returns {void}
+     **/
+    const renderValBlock = (songIndex, stzIndex, swarIndex, field, val) => {
+      let elemBlock = document.createElement("p")
+      elemBlock.innerText = val
+      // if(className) elemBlock.className = className
+      return elemBlock
+    }
 
-    let tblBodyRow = document.createElement('div')
-    tblValues.forEach(body => {
-      
-
-      tblBodyRow.className = body[body.length - 1]
-
-      for (let i = 0; i < body.length - 1; i++) {
-        let tblBodyRowCol = document.createElement('p')
-        tblBodyRowCol.innerHTML = body[i]
-        tblBodyRow.append(tblBodyRowCol)
+    const downloadSong = () => {
+      let data = localStorage.getItem("song");
+      const parsedData = JSON.parse(data);
+      if (data) {
+        const jsonData = JSON.stringify(parsedData);
+        const blob = new Blob([jsonData], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${parsedData.id}.json`;
+        a.click();
       }
-      // tbl.append(tblBodyRow)
-    })
-    
-    return tblBodyRow
-    // elem.append(tbl)
-  }
+    }
 
-</script>
+  </script>
+</body>
+
+</html>

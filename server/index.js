@@ -15,9 +15,9 @@ const GetSongIndex = (fileNames) => {
         return {
           id: parsedJson.id,
           title: parsedJson.title,
-          genre: parsedJson.artist,
+          genre: parsedJson.genre,
           album: parsedJson.album,
-          composer: parsedJson.year,
+          composer: parsedJson.composer,
           tag: parsedJson.tag,
           }
       });

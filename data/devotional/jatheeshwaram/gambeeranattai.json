@@ -4,14 +4,14 @@
   "genre": "Devotional",
   "composer": "NA",
   "album": "Jatheeshwaram",
-  "tags": [
+  "tag": [
     "jatheeshwaram",
     "gambeeranattai",
     "devotional"
   ],
-  "songs": [
+  "song": [
     {
-      "title": "Jatheeshwaram",
+      "title": "",
       "raagam": "Gambhira Nattai",
       "thaalam": "Adhi",
       "arohanam": [
@@ -30,62 +30,17 @@
         "Ga2",
         "Sa"
       ],
-      "swaram": [
+      "stanza": [
         {
-          "syllable": {
-            "sign": [
-              "Pa Ma Paa |",
-              "Ga Ma Pa Ma Ga Sa Ga Ma |"
-            ]
-          },
-          "repeat": 0
-        },
-        {
-          "syllable": {
-            "sign": [
-              "Pa Ni Pa Saa Ni |",
-              "Pa Ni Pa, Ma |",
-              "Ga Sa Ga Ma ||"
-            ]
-          },
-          "repeat": 0
-        },
-        {
-          "syllable": {
-            "sign": [
-              "Pa Ni Pa Pa Ma |",
-              "Ma Pa Ma Ma Ga |"
-            ]
-          },
-          "repeat": 0
-        },
-        {
-          "syllable": {
-            "sign": [
-              "Ga Ma Ga Ga |",
-              "Saa Saa Pa Pa Sa Sa |",
-              "Ni Pa Ma Ga Sa Ga Ma ||"
-            ]
-          },
-          "repeat": 0
-        },
-        {
-          "syllable": {
-            "sign": [
-              "Pa Ni Pa, Ma Pa Ma |",
-              "Ga Ma Ga , Sa Ga Sa |"
-            ]
-          },
-          "repeat": 0
-        },
-        {
-          "syllable": {
-            "sign": [
-              "Ma Ga Sa Pa Ma Ga Sa |",
-              "Ni Pa Ma Ga Sa ,"
-            ]
-          },
-          "repeat": 0
+          "swaram": [
+            "Pa Ma Paa | Ga Ma Pa Ma Ga Sa Ga Ma |",
+            "Pa Ni Pa Saa Ni | Pa Ni Pa, Ma | Ga Sa Ga Ma ||",
+            "Pa Ni Pa Pa Ma | Ma Pa Ma Ma Ga |",
+            "Ga Ma Ga Ga | Saa Saa Pa Pa Sa Sa | Ni Pa Ma Ga Sa Ga Ma ||",
+            "Pa Ni Pa, Ma Pa Ma | Ga Ma Ga , Sa Ga Sa |",
+            "Ma Ga Sa Pa Ma Ga Sa | Ni Pa Ma Ga Sa ,"
+          ],
+          "lyric_en": []
         }
       ]
     }

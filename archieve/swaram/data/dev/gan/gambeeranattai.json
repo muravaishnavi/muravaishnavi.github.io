@@ -1,0 +1,93 @@
+{
+  "id": "devotional-jatheeshwaram-gambeeranattai",
+  "title": "Gambeera Nattai",
+  "genre": "Devotional",
+  "composer": "NA",
+  "album": "Jatheeshwaram",
+  "tag": [
+    "jatheeshwaram",
+    "gambeeranattai",
+    "devotional"
+  ],
+  "songs": [
+    {
+      "title": "Jatheeshwaram",
+      "raagam": "Gambhira Nattai",
+      "thaalam": "Adhi",
+      "arohanam": [
+        "Sa",
+        "Ga2",
+        "Ma1",
+        "Pa",
+        "Ni2",
+        "Saa`"
+      ],
+      "avarohanam": [
+        "Saa",
+        "Ni2",
+        "Pa",
+        "Ma1",
+        "Ga2",
+        "Sa"
+      ],
+      "swaram": [
+        {
+          "syllable": {
+            "sign": [
+              "Pa Ma Paa |",
+              "Ga Ma Pa Ma Ga Sa Ga Ma |"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Pa Ni Pa Saa Ni |",
+              "Pa Ni Pa, Ma |",
+              "Ga Sa Ga Ma ||"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Pa Ni Pa Pa Ma |",
+              "Ma Pa Ma Ma Ga |"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ga Ma Ga Ga |",
+              "Saa Saa Pa Pa Sa Sa |",
+              "Ni Pa Ma Ga Sa Ga Ma ||"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Pa Ni Pa, Ma Pa Ma |",
+              "Ga Ma Ga , Sa Ga Sa |"
+            ]
+          },
+          "repeat": 0
+        },
+        {
+          "syllable": {
+            "sign": [
+              "Ma Ga Sa Pa Ma Ga Sa |",
+              "Ni Pa Ma Ga Sa ,"
+            ]
+          },
+          "repeat": 0
+        }
+      ]
+    }
+  ]
+}

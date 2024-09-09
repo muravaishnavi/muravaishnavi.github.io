@@ -13,6 +13,22 @@
 
 </body>
 <script>
+window.onload = function() {
+  // Print preview button
+  var printPreviewBtn = document.createElement("button");
+  printPreviewBtn.innerHTML = "Print Preview";
+  printPreviewBtn.onclick = function() {
+    window.print();
+  };
+  document.body.appendChild(printPreviewBtn);
 
+  // Print button
+  var printBtn = document.createElement("button");
+  printBtn.innerHTML = "Print";
+  printBtn.onclick = function() {
+    window.print();
+  };
+  document.body.appendChild(printBtn);
+};
 </script>
 </html>
