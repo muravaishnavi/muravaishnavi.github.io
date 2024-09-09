@@ -15,7 +15,7 @@
         border-radius: 30px;
         box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
       } */
-
+/* 
       .header {
         background-color: rgb(120, 82, 178);
         color: white;
@@ -25,29 +25,21 @@
         align-items: center;
         padding-left: 15px;
         padding-right: 15px;
-      }
+      } */
 
-    .home-link {
+    /* .home-link {
       font-weight: bold;
-    }
+    } */
 
-    .song-search {
-      width: 500px;
-      border: none;
-      margin-top: 12px;
-      margin-bottom: 12px;
-      height: 30px;
-      border-radius: 15px;
-      padding-left: 20px;
-    }
+   
 
-    .container {
+    /* .container {
       margin-top: 10px;
       border-width: 1px;
       border-style: solid;
       border-color: rgb(200, 200, 200);
       border-radius: 6px;
-    }
+    } */
 
     .flexbox {
       display: flex;
@@ -81,22 +73,11 @@
   </head>
   <body>
     <div class="header">
-      <div class="home-link">Home</div>
+      <a href="index.html" class="btn-style">Home</a>
       <a href="compose.html" class="btn-style">Compose</a>
-      <!-- <button id="btn-update" class="btn-style" onclick=`window.location.href=compose.html`>
-        Compose
-      </button> -->
       <input id="search" class="song-search" placeholder="Search" onkeyup="search_result()">
-      <!-- <button>Download</button> -->
     </div>
-
-    <!-- <input id="search" type="text" placeholder="Search for a song" onkeyup="search_result()"> -->
     <div id="container" class="container">
-      <!-- <ul id="song-preview" class="song-preview">
-
-      </ul> -->
-      <!-- <p class="song-title"></p>
-      <p class="song-composer"></p> -->
     </div>
   </body>
 </html>
@@ -104,12 +85,39 @@
 <script type="text/javascript">
   let data = {}
   window.onload = function () {
+     // Call the function with the desired path
+    iterateSongs('/data/');
     loadSongIndex("data/index.json", (response) => {
       data = JSON.parse(response)
       search_result()
     })
-
   }
+
+
+  function iterateSongs(path) {
+      // Assuming you are running this code in a browser environment
+      // You can use the Fetch API to retrieve the list of files in the given path
+      fetch(path)
+        .then(response => response.text())
+        .then(data => {
+          // Split the data into an array of file names
+          const fileNames = data.split('\n');
+
+          // Iterate over each file name
+          fileNames.forEach(fileName => {
+            // Check if the file has a .txt extension
+            if (fileName.endsWith('.txt')) {
+              // Perform your desired operations on the text file here
+              console.log(`Processing file: ${fileName}`);
+            }
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+
+   
 
    const loadSongIndex = (fileName, callback) => {
       const xObj = new XMLHttpRequest();

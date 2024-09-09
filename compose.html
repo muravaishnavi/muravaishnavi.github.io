@@ -8,20 +8,20 @@
   <link rel="stylesheet" href="css/fontawesome/css/font-awesome.min.css">
 </head>
 <body>
-  <main>
-    
-    
-    <div class="container">
-      <button id="btn-home" class="btn-style">
+
+    <div class="header">
+      <!-- <button id="btn-home" class="btn-style" onclick="window.location.href='index.html'">
         Home
-      </button>
-      <button id="btn-save" class="btn-style">
-        Save
-      </button>
-      <div id="data">
-      </div>
+      </button> -->
+      <a href="index.html" class="btn-style">Home</a>
+      <a href="#" onclick="downloadSong()" class="btn-style">Download Song</a>
+      <a href="#" onclick="downloadIndex()" class="btn-style">Download Index</a>
     </div>
-  </main>
+    
+    <div id="container" class="container">
+
+    </div>
+
   <script>
 
     window.addEventListener("DOMContentLoaded", () => {
@@ -29,15 +29,6 @@
       const urlParams = new URLSearchParams(queryString);
       const songId = urlParams.get("id");
       const genreParam = urlParams.get("genre");
-
-      //Set OnClick attribute to Home button
-      const btnHome = document.querySelector("#btn-home")
-      btnHome.setAttribute("onclick", `window.location.href="index.html"`)
-
-      // Set OnClick attribute to Save button
-      const btnSave = document.querySelector("#btn-save")
-      
-      btnSave.setAttribute("onclick", `persistSongChanges()`)
 
       if (songId) {
         const fmtId = songId.replace(/-/g, "/")
@@ -69,6 +60,7 @@
       const processData = (response) => {
         localStorage.setItem("song", response);
         const jsonData = JSON.parse(response);
+        console.log(jsonData)
         renderElem(jsonData)
       };
 
@@ -79,7 +71,7 @@
 
       const renderElem = (data) => {
         // console.log(data)
-          const dataElem = document.querySelector("#data");
+          const dataElem = document.querySelector("#container");
           // Remove all children from Swaram Table, if any
           while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
 
@@ -89,15 +81,16 @@
           // add title block
           songFull.append(addSongTitle(data))
 
-          data.songs.forEach((song, index) => {
-            let songStanza = document.createElement("div")
-            songStanza.className = "song-stanza"
+          data.song.forEach((song, index) => {
+            let songInstance = document.createElement("div")
+            songInstance.className = "song-instance"
             // add Song Metadata
-            songStanza.append(addSongMetadata(index, song))
+            songInstance.append(addSongMetadata(index, song))
             // const index = data.songs.indexOf(song)
-            let songBody = addSongBody(song, index)
-            songStanza.append(songBody)
-            songFull.append(songStanza)
+
+            let songBody = addSongStanza(song, index)
+            songInstance.append(songBody)
+            songFull.append(songInstance)
             dataElem.append(songFull)
           })
 
@@ -175,54 +168,46 @@
          * @param {Object} song
          * @param {Number} songIndex
          */
-        const addSongBody = (song, songIndex) => {
+        const addSongStanza = (song, songIndex) => {
           let songBody = document.createElement("div")
           songBody.className = "song-body"
-          song.swaram.forEach((swar, swarIndex) => {
 
-            // let swarIndex = song.swaram.indexOf(swar);
-            let songPara = document.createElement("div")
-            songPara.className = "song-para"
+          
+          // // Add Icon
+          // const addIconElem = document.createElement("i");
+          // addIconElem.className = "fa fa-plus";
+          // addIconElem.style = "margin-left: 5px";
+          // addIconElem.addEventListener("click", () => {
+          //   addNewBlock(songIndex, swarIndex)
+          // });
 
-            // Add Icon
-            const addIconElem = document.createElement("i");
-            addIconElem.className = "fa fa-plus";
-            addIconElem.style = "margin-left: 5px";
-            addIconElem.addEventListener("click", () => {
-              addNewBlock(songIndex, swarIndex)
-            });
+          // // Del Icon
+          // const remIconElem = document.createElement("i");
+          // remIconElem.className = "fa fa-minus";
+          // remIconElem.style = "margin-left: 5px";
+          // remIconElem.addEventListener("click", () => {
+          //   removeBlock(songIndex, swarIndex)
+          // });
+          // songPara.append(addIconElem, remIconElem)
 
-            // Del Icon
-            const remIconElem = document.createElement("i");
-            remIconElem.className = "fa fa-minus";
-            remIconElem.style = "margin-left: 5px";
-            remIconElem.addEventListener("click", () => {
-              removeBlock(songIndex, swarIndex)
-            });
+          song.stanza.forEach((stz, stzIndex) => {
+            let songStanza = document.createElement("div")
+            songStanza.className = "song-stanza"
 
-            // Repeat Number
-            const repeatElem = renderValBlock("repeat", songIndex, swarIndex, null, swar.repeat, "swrRepeat-input")
-            songPara.append(addIconElem, remIconElem, repeatElem)
+            stz.swaram.forEach((swrVal, swrIndex) => {
+              const swrAttrs = { field: "swaram", className: "swrValues" }
+              songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
 
+              const lyrAttrs = { field: "lyric_en", className: "lyrValues" }
+              songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs))
+              songBody.append(songStanza)
+            })
+            // const swrAttrs = { type: "sign", className: "swrValues" }
+            // songStanza.append(renderSwarBlock(songIndex, stzIndex, stz.swaram, swrAttrs))
 
-
-            // let swrValues = new Array()
-            if (swar.syllable.sign && swar.syllable.sign.length > 0) {
-              const signs = swar.syllable.sign.map(item => item)
-              const attrs = {type: "sign", className: "swrValues" }
-              songPara.append(renderSwarBlock(songIndex, swarIndex, signs, attrs))
-            }
-
-            // let lyrValues = new Array()
-            if (swar.syllable.lyric && swar.syllable.lyric.length > 0) {
-              const lyrics = swar.syllable.lyric.map(item => item)
-
-              // lyrValues.push(lyrics)
-              const attrs = { type: "lyric", className: "lyrValues" }
-              songPara.append(renderSwarBlock(songIndex, swarIndex, lyrics, attrs))
-            }
-            songBody.append(songPara)
-            
+            // const lyrAttrs = { type: "lyric", className: "lyrValues" }
+            // songStanza.append(renderSwarBlock(songIndex, stzIndex, stz.lyric, lyrAttrs))
+            songBody.append(songStanza)
           })
           return songBody
         }
@@ -232,19 +217,10 @@
        * @param {Object} song
        * @param {Number} songIndex
        */
-      const renderSwarBlock = (songIndex, swarIndex, valArr, attrs) => {
+      const renderSwarBlock = (songIndex, stzIndex, swrIndex, val, attrs) => {
         let elemBlock = document.createElement('div')
         elemBlock.className = attrs.className
-        valArr.forEach((val, valIndex) => {
-          // elemBlock.append(...swarLine.reduce((acc, val) => {
-          //   return acc.concat(renderValBlock(attrs.type, songIndex, swarIndex, val))
-          // }, []))
-          elemBlock.append(renderValBlock(attrs.type, songIndex, swarIndex, valIndex, val))
-        })
-
-        // if (repeat > 0) {
-        //   elemBlock.append(renderValBlock(attrs.type, songIndex, swarIndex, repeat))
-        // }
+        elemBlock.append(renderValBlock(songIndex, stzIndex, swrIndex, attrs.field, val))
         return elemBlock
       }
 
@@ -254,16 +230,14 @@
        * @param {Array} obj
        * @returns {void}
        **/
-      const renderValBlock = (swarType, songIndex, swarIndex, valIndex, swarVal, className) => {
+      const renderValBlock = (songIndex, stzIndex, swarIndex, field, val) => {
           let elemBlock = document.createElement("input")
           elemBlock.type = "text"
-          elemBlock.name = swarType
-          elemBlock.value = swarVal
-          if(className) elemBlock.className = className
+          elemBlock.name = field
+          elemBlock.value = val
+          // if(className) elemBlock.className = className
           elemBlock.addEventListener("focusout", (event) => {
-            const swarVal = event.target.value
-            const swarType = event.target.name
-            syncUpdate(songIndex, swarIndex, valIndex, swarType, swarVal)
+            syncUpdate(songIndex, stzIndex, swarIndex, event.target.name, event.target.value)
           });
           return elemBlock
       }
@@ -300,25 +274,25 @@
         }
       }
 
-      const syncUpdate = (songIndex, swarIndex, valIndex, type, value) => {
+      const syncUpdate = (songIndex, stzIndex, index, field, value) => {
         let data = localStorage.getItem("song");
         
         if (data) {
           const parsedData = JSON.parse(data);
           
-          if(type === "sign" || type === "lyric")
-            parsedData.songs[songIndex].swaram[swarIndex].syllable[type][valIndex] = value
-          else if(type === "repeat")
-            parsedData.songs[songIndex].swaram[swarIndex][type] = value
+          if(field === "swaram" )
+            parsedData.song[songIndex].stanza[stzIndex].swaram[index] = value
+          else if(field === "lyric_en")
+            parsedData.song[songIndex].stanza[stzIndex].lyric_en[index] = value
           // Metadata processing
           else{
             // Song Stanza Metadata
             if(songIndex != null){
-               parsedData.songs[songIndex][type] = value
+               parsedData.song[songIndex][field] = value
             }
             // Song Metadata
             else {
-              parsedData[type] = value
+              parsedData[field] = value
             }
           }
           // Add ID to parsed Data
@@ -329,7 +303,7 @@
         }
       }
 
-      const persistSongChanges = () => {
+      const downloadSong = () => {
         let data = localStorage.getItem("song");
         const parsedData = JSON.parse(data);
         if(data){
@@ -341,6 +315,10 @@
             a.download = `${parsedData.id}.json`;
             a.click();
         }
+      }
+
+      const downloadIndex = () => {
+        
       }
 
       

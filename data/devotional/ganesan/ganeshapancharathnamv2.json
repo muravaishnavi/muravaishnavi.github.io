@@ -1,0 +1,108 @@
+{
+  "id": "devotional-ganesan-ganeshapancharathnamv2",
+  "title": "Ganesha Pancharathnam",
+  "genre": "Devotional",
+  "composer": "Shri. Adi Sankara",
+  "album": "Ganeshan",
+  "tag": [
+    "mudaakaraatta",
+    "ganesha",
+    "devotional",
+    "adhi sankara"
+  ],
+  "song": [
+    {
+      "title": "Song#1",
+      "raagam": "Hamsadwani",
+      "thaalam": "Ekam",
+      "arohanam": [
+        "Sa",
+        "Ri2",
+        "Ga2",
+        "Pa",
+        "Ni2",
+        "Saa"
+      ],
+      "avarohanam": [
+        "Saa",
+        "Ni2",
+        "Pa",
+        "Ga2",
+        "Ri2",
+        "Sa"
+      ],
+      "stanza": [
+        {
+          "swaram": [
+            "Ga Gaa Ga Gaa Pa, Ri Ga Ri Saa",
+            "Sa Paa Pa Saa Sa, Rii Ri Rii",
+            "Ni Rii Ni Rii Ri, Ni Pa Ni Rii",
+            "Ga Gaa Pa Rii Ri, Nii Ri Sa",
+            "Ga Rii Ri Gaa Ga, Paa Pa Paa",
+            "Pa Gaa Ga Paa Pa, Nii Saa Nii",
+            "Ni Gaa Ri Nii Ri, Gaa Ri Saa",
+            "Pa Saa Sa Gaa Pa, Saa Sa Saa",
+            "Pa Saa Sa Gaa Pa, Paa Ri Saa"
+          ],
+          "lyric_en": [
+            "Mudaa-Karaatta, Modakam",
+            "Sadaa Vimukti, Saadhakam",
+            "Kalaa-Dhara, Avatamsakam",
+            "Vilaasi-Loka, Raksakam",
+            "Anaayakaika, Naayakam",
+            "Vinaashitebha, Daityakam",
+            "Nata-Ashubha-Ashu, Naashakam",
+            "Namaami-Tham, Vinaayakam",
+            "Namaami-Tham, Vinaayakam"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Song#2",
+      "raagam": "Malahari",
+      "thaalam": "",
+      "arohanam": [
+        "Sa",
+        "Ri1",
+        "Ma1",
+        "Pa",
+        "Da1",
+        "Saa"
+      ],
+      "avarohanam": [
+        "Saa",
+        "Da1",
+        "Pa",
+        "Ma1",
+        "Ga2",
+        "Ri1",
+        "Sa"
+      ],
+      "stanza": [
+        {
+          "swaram": [
+            "Ma Maa Ma Rii Ri, Ri Ma Ri Saa",
+            "Sa Daa Da Paa Da, Paa Da Saa",
+            "Sa Maa Ma Paa Pa, Paa Da Paa",
+            "Sa Daa Sa Paa Da, Maa Ma Paa",
+            "Pa Rii Sa Rii, Sa Daa Sa Rii",
+            "Ri Maa Ga Rii, Sa Daa Ri Saa",
+            "Ma Gaa Ri Saa, Sa Daa Da Paa",
+            "Sa Saa Sa Paa Ma, Rii Ri Saa"
+          ],
+          "lyric_en": [
+            "Natetara-Ati, Bhiikaram",
+            "Navodita-Arka, Bhaasvaram",
+            "Namat-Sura-Ari, Nir-Jaram",
+            "Nata-Adhika-Apad, Uddharam",
+            "Sureshvaram, Nidhi-ishvaram",
+            "Gajeshvaram, Ganneshvaram",
+            "Maheshvaram, Tama-Ashraye",
+            "Paraatparam, Nir-Antaram"
+          ]
+        }
+      ]
+    }
+  ]
+}

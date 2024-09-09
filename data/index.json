@@ -1,28 +1,23 @@
-{
-  "description": "song index list",
-  "songs": [
-    {
-      "id": "dev-gan-mudaakaraatta",
-      "title": "Ganesha Pancharatnam",
-      "description": "Ganesha Pancharatnam",
-      "composer": "Adi Shankarar",
-      "tags": [
-        "mudaakaraatta",
-        "ganesha",
-        "devotional",
-        "adhi sankara"
-      ]
-    },
-    {
-      "id": "dev-swar-jatheeshwaram",
-      "title": "Jatheeshwaram",
-      "description": "Jatheeshwaram",
-      "composer": "Unknown",
-      "tags": [
-        "jatheeshwaram",
-        "devotional",
-        "swaram"
-      ]
-    }
-  ]
-}
+[
+  {
+    "id": "test-test-test",
+    "title": "test",
+    "album": "test"
+  },
+  {
+    "id": "devotional-jatheeshwaram-gambeeranattai",
+    "title": "Gambeera Nattai",
+    "album": "Jatheeshwaram"
+  },
+  {
+    "id": "devotional-ganesan-ganeshapancharathnamv2",
+    "title": "Ganesha Pancharathnam",
+    "album": "Ganeshan",
+    "tag": [
+      "mudaakaraatta",
+      "ganesha",
+      "devotional",
+      "adhi sankara"
+    ]
+  }
+]
