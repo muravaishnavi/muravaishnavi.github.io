@@ -194,11 +194,21 @@
             songStanza.className = "song-stanza"
 
             stz.swaram.forEach((swrVal, swrIndex) => {
-              const swrAttrs = { field: "swaram", className: "swrValues" }
-              songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
+              if(swrVal && swrVal.length > 0){
+                const swrAttrs = { field: "swaram", className: "swrValues" }
+                songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
+              }
+              
+              if(stz.lyric_en && stz.lyric_en.length > 0){
+                const lyrAttrs = { field: "lyric_en", className: "lyrValues" }
+                songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs))
+              }
 
-              const lyrAttrs = { field: "lyric_en", className: "lyrValues" }
-              songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs))
+              if(stz.lyric_ta && stz.lyric_ta.length > 0){
+                const lyrAttrs = { field: "lyric_ta", className: "lyrValues" }
+                songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_ta[swrIndex], lyrAttrs))
+              }
+
               songBody.append(songStanza)
             })
             // const swrAttrs = { type: "sign", className: "swrValues" }
