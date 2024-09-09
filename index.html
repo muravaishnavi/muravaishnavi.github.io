@@ -39,7 +39,7 @@
       <div class="header">
         <a href="index.html" class="btn-style">Home</a>
         <a href="compose.html" class="btn-style">Compose</a>
-        <input id="search" class="song-search" placeholder="Search" onkeyup="search_result()">
+        <input id="search" class="song-search" placeholder="Search" onkeyup="filter_result()">
       </div>
         <div id="container" class="container">
         </div>
@@ -48,17 +48,14 @@
 </html>
 
 <script type="text/javascript">
-  // let data = {}
+
   window.onload = function () {
-     // Call the function with the desired path
-    // iterateSongs('/data/');
     loadData("data/index.json", processData)
   }
 
   const processData = (response) => {
       localStorage.setItem("song", response);
       const jsonData = JSON.parse(response);
-      // search_result(jsonData)
       renderElem(jsonData)
     };
 
@@ -84,6 +81,12 @@
       while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
 
       
+      if(songIndex.length === 0){
+        const noData = document.createElement("p");
+        noData.innerText = "No Matching Song Found";
+        dataElem.append(noData);
+        return;
+      }
 
       songIndex.forEach((song, index) => {
         const grid = document.createElement("div");
@@ -113,31 +116,18 @@
       return itemElem;
     }
 
-  function search_result(data){
-
+  function filter_result(e){
+    const data = localStorage.getItem("song");
+    const jsonData = JSON.parse(data);
     const input = document.getElementById("search").value.toLowerCase()
-    const elemParent = document.querySelector("#container")
-    
-    // Remove all children from Swaram Table, if any
-    while (elemParent.firstChild) elemParent.removeChild(elemParent.firstChild)
-
-    for(i=0; i<data.length; i++){
-      let obj = data[i];
-
-      if(obj.tag && obj.tag.findIndex((txt => txt.includes(input))) > -1 ){
-        const elemChild = document.createElement("div");
-        elemChild.className = "flexbox";
-        elemChild.innerHTML = `
-        <div class = "flexbox-items">
-          <a href="view.html?id=${obj.id}">${obj.title}</a>
-          <div>${obj.genre}</div>
-          <div>${obj.composer}</div>
-          <div>${obj.album}</div>
-        </div> 
-        `
-        elemParent.append(elemChild)
+    const filtered_data = jsonData.reduce((curr, obj) => {
+      if (obj.tag && obj.tag.findIndex((txt => txt.includes(input))) > -1) {
+        return curr.concat(obj)
       }
-    }
-
+      else{
+        return curr
+      }
+    },[])
+    renderElem(filtered_data)
   }
 </script>

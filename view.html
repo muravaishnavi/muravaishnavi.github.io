@@ -12,9 +12,6 @@
 <body>
 <div class="body">
   <div class="header">
-    <!-- <button id="btn-home" class="btn-style" onclick="window.location.href='index.html'">
-          Home
-        </button> -->
     <a href="index.html" class="btn-style">Home</a>
     <a href="#" onclick="window.print()" class="btn-style">Print</a>
   </div>
@@ -31,7 +28,7 @@
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const songId = urlParams.get("id");
-      const genreParam = urlParams.get("genre");
+      
 
       if (songId) {
         const fmtId = songId.replace(/-/g, "/")
@@ -172,11 +169,21 @@
         songStanza.className = "song-stanza"
 
         stz.swaram.forEach((swrVal, swrIndex) => {
-          const swrAttrs = { field: "swaram", className: "swrValues" }
-          songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
+          if(swrVal && swrVal.length > 0){
+            const swrAttrs = { field: "swaram", className: "swrValues" }
+            songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
+          }
+          
+          if(stz.lyric_en && stz.lyric_en.length > 0){
+            const lyrAttrs_en = { field: "lyric_en", className: "lyrValues" }
+            songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs_en))
+          }
+          
+          if(stz.lyric_ta && stz.lyric_ta.length > 0){
+            const lyrAttrs_ta = { field: "lyric_ta", className: "lyrValues" }
+            songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_ta[swrIndex], lyrAttrs_ta))
+          }
 
-          const lyrAttrs = { field: "lyric_en", className: "lyrValues" }
-          songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs))
           songBody.append(songStanza)
         })
         // const swrAttrs = { type: "sign", className: "swrValues" }
