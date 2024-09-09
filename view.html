@@ -10,17 +10,17 @@
 </head>
 
 <body>
-<div class="body">
-  <div class="header">
-    <a href="index.html" class="btn-style">Home</a>
-    <a href="#" onclick="window.print()" class="btn-style">Print</a>
+  <div class="body">
+    <div class="header">
+      <a href="index.html" class="btn-style">Home</a>
+      <a href="#" onclick="window.print()" class="btn-style">Print</a>
+    </div>
+
+    <div id="container" class="container">
+
+    </div>
   </div>
-  
-  <div id="container" class="container">
-  
-  </div>
-</div>
- 
+
 
   <script>
 
@@ -28,7 +28,7 @@
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const songId = urlParams.get("id");
-      
+
 
       if (songId) {
         const fmtId = songId.replace(/-/g, "/")
@@ -49,7 +49,7 @@
         if (xObj.readyState === 4 && xObj.status === 200) {
           callback(xObj.responseText);
         }
-        else{
+        else {
           console.log('File Not Found')
         }
       };
@@ -169,17 +169,18 @@
         songStanza.className = "song-stanza"
 
         stz.swaram.forEach((swrVal, swrIndex) => {
-          if(swrVal && swrVal.length > 0){
+          console.log(swrVal)
+          if (swrVal && swrVal.length > 0) {
             const swrAttrs = { field: "swaram", className: "swrValues" }
             songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
           }
-          
-          if(stz.lyric_en && stz.lyric_en.length > 0){
+
+          if (stz.lyric_en && stz.lyric_en.length > 0) {
             const lyrAttrs_en = { field: "lyric_en", className: "lyrValues" }
             songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs_en))
           }
-          
-          if(stz.lyric_ta && stz.lyric_ta.length > 0){
+
+          if (stz.lyric_ta && stz.lyric_ta.length > 0) {
             const lyrAttrs_ta = { field: "lyric_ta", className: "lyrValues" }
             songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_ta[swrIndex], lyrAttrs_ta))
           }

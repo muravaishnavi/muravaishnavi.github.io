@@ -1,0 +1,120 @@
+{
+    "id": "devotional-keerthanai-brahmaokate",
+    "title": "Brahmaokate",
+    "genre": "Devotional",
+    "composer": "Annamacharya",
+    "album": "Keerthanai",
+    "tag": [
+        "Devotional",
+        "Keerthanai",
+        "Annamacharya",
+        "Brahmaokate"
+    ],
+    "song": [
+        {
+            "title": "",
+            "raagam": "Bowli/Boopalam",
+            "thaalam": "Ekam",
+            "arohanam": [
+                "S",
+                "R1",
+                "G3",
+                "P",
+                "D1",
+                "S"
+            ],
+            "avarohanam": [
+                "S",
+                "N3",
+                "D1",
+                "P",
+                "G3",
+                "R1",
+                "S"
+            ],
+            "stanza": [
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "Brahmam okate... para brahmam okate",
+                        "Brahmam okate... para brahmam okate",
+                        "Brahmam okate... para brahmam okate"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "thandana na ahi thandana na puri",
+                        "thandana na ahi thandana na puri",
+                        "thandanaana bhala thandanaana",
+                        "thandanaana bhala thandanaana"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "Brahmam okate... para brahmam okate",
+                        "Brahmam okate... para brahmam okate",
+                        "Brahmam okate... para brahmam okate"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "kandhuvahu hi nadhiga molindo levu",
+                        "andhariki sri Hare andharathma... (2)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "indhulo janthu kula muinda okate",
+                        "andhariki sri Hare andharathma... (2)",
+                        "Hare andharathma.",
+                        "Sri Hare andharathma.",
+                        "................(Brahma Okate)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "nindara raju nidhrenchu nidhrayonkate",
+                        "andane bantu nidra nadhiyu okate... (2)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "mendaina brahmanudu mettu bhoomi okate",
+                        "chandalu dunteti sari bhoomi okate... (2)",
+                        "................(Brahma Okate)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "kadugeeye nukumeedha Kayu en dokate",
+                        "pudamisu nagamumeedha bolayu endokate... (2)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "swaram": [],
+                    "lyric_en": [
+                        "kadukunu lenupaapa karmulanu sarigaava",
+                        "jatiju shri Venteshwara naamamum okate...(2)",
+                        "................(Brahma Okate)"
+                    ],
+                    "lyric_ta": []
+                }
+            ]
+        }
+    ]
+}
