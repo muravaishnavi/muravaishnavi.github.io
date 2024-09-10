@@ -189,36 +189,53 @@
           // });
           // songPara.append(addIconElem, remIconElem)
 
+          // Find content holding element in the stanza i.e., swaram or English lric or Tamil Lyric
+
           song.stanza.forEach((stz, stzIndex) => {
             let songStanza = document.createElement("div")
             songStanza.className = "song-stanza"
 
-            stz.swaram.forEach((swrVal, swrIndex) => {
-              if(swrVal && swrVal.length > 0){
-                const swrAttrs = { field: "swaram", className: "swrValues" }
-                songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, swrVal, swrAttrs))
-              }
-              
-              if(stz.lyric_en && stz.lyric_en.length > 0){
-                const lyrAttrs = { field: "lyric_en", className: "lyrValues" }
-                songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_en[swrIndex], lyrAttrs))
+            let lineCount = getLineCount(stz)
+            
+
+            for (let lineIndex = 0; lineIndex < lineCount; lineIndex++) {
+              if (stz.swaram && stz.swaram.length > 0) {
+                const swrAttrs = { field: "swaram", className: "swr-values" }
+                songStanza.append(renderSwarBlock(songIndex, stzIndex, lineIndex, stz.swaram[lineIndex], swrAttrs))
               }
 
-              if(stz.lyric_ta && stz.lyric_ta.length > 0){
-                const lyrAttrs = { field: "lyric_ta", className: "lyrValues" }
-                songStanza.append(renderSwarBlock(songIndex, stzIndex, swrIndex, stz.lyric_ta[swrIndex], lyrAttrs))
+              if (stz.lyric_en && stz.lyric_en.length > 0) {
+                const lyrAttrs_en = { field: "lyric_en", className: "en-lyr-values" }
+                songStanza.append(renderSwarBlock(songIndex, stzIndex, lineIndex, stz.lyric_en[lineIndex], lyrAttrs_en))
               }
 
+              if (stz.lyric_ta && stz.lyric_ta.length > 0) {
+                const lyrAttrs_ta = { field: "lyric_ta", className: "ta-lyr-values" }
+                songStanza.append(renderSwarBlock(songIndex, stzIndex, lineIndex, stz.lyric_ta[lineIndex], lyrAttrs_ta))
+              }
               songBody.append(songStanza)
-            })
-            // const swrAttrs = { type: "sign", className: "swrValues" }
-            // songStanza.append(renderSwarBlock(songIndex, stzIndex, stz.swaram, swrAttrs))
-
-            // const lyrAttrs = { type: "lyric", className: "lyrValues" }
-            // songStanza.append(renderSwarBlock(songIndex, stzIndex, stz.lyric, lyrAttrs))
-            songBody.append(songStanza)
+            }
           })
           return songBody
+        }
+
+        const getLineCount = (stz) => {
+          if (stz.swaram.length === 0) {
+            if (stz.lyric_en.length === 0) {
+              if (stz.lyric_ta.length === 0) {
+                return 0
+              }
+              else {
+                lineCount = stz.lyric_ta.length;
+              }
+            }
+            else {
+              lineCount = stz.lyric_en.length;
+            }
+          }
+          else {
+            lineCount = stz.swaram.length;
+          }
         }
         
       /**

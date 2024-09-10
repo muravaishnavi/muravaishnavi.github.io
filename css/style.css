@@ -17,8 +17,7 @@ p {
     width: 90%;
     height: 100%;
     border-radius: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 15px 15px 15px 15px;
     align-items: center;
     /* margin: 10px; */
     font-family: Arial, Helvetica, sans-serif;
@@ -154,6 +153,16 @@ p {
     border-radius: 10px;
     background-color: rgb(189, 189, 172);
 }
+.song-controls-block {
+    display: block;
+}
+.song-controls {
+    display: inline;
+    margin: 5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
+    align-items: center;
+    font-size: medium;
+}
 
 .song-stanza {
     display: block;
@@ -161,7 +170,7 @@ p {
 
 }
 
-.swrValues {
+.swr-values {
     /* vertical-align: text-top; */
     width: auto;
     font-weight: bold;
@@ -173,7 +182,7 @@ p {
     } */
 }
 
-.swrValues input {
+.swr-values input {
     background-color: transparent;
     
     border: none;
@@ -184,46 +193,19 @@ p {
     font-size: large;
 }
 
-.swrValues p {
+.swr-values p {
     /* width: 150px; */
     display: inline-block;
     margin-right: 15px;
 }
 
-.swrRepeat {
-    vertical-align: text-top;
-    font-weight: bold;
-    text-align: right;
-    padding-left: 5px;
-    background-color: beige;
-    /* hover {
-        background-color: coral;
-    } */
-}
-
-.swrRepeat-input {
-    background-color: transparent;
-    border: none;
-    padding: 8px;
-    width: 10px;
-    display: inline-block;
-    margin-right: 15px;
-    font-size: medium;
-}
-
-.swrRepeat p {
-    /* width: 150px; */
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.lyrValues {
+.en-lyr-values {
     text-align: left;
     padding-left: 5px;
     background-color: #f2f2f2;
 }
 
-.lyrValues input {
+.en-lyr-values input {
     background-color: transparent;
     border: none;
     width: 300px;
@@ -233,7 +215,29 @@ p {
     font-size: large;
 }
 
-.lyrValues p {
+.en-lyr-values p {
+    /* width: 150px; */
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.ta-lyr-values {
+    text-align: left;
+    padding-left: 5px;
+    background-color: #d8d4d4;
+}
+
+.ta-lyr-values input {
+    background-color: transparent;
+    border: none;
+    width: 300px;
+    padding: 16px;
+    display: inline-block;
+    margin-right: 15px;
+    font-size: large;
+}
+
+.ta-lyr-values p {
     /* width: 150px; */
     display: inline-block;
     margin-right: 15px;
