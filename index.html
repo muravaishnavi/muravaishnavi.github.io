@@ -6,12 +6,21 @@
     /* .song-index {
       display: block
     } */
+
+    
+
     .song-grid {
       width: 200px;
       box-shadow: 0 0 0 rgba(0, 0, 0, 0.3);
       display: inline-block;
       vertical-align: top;
       margin: 15px 15px 15px 15px;
+    }
+
+   .song-grid p {
+      font-family: Arial;
+      margin-top: 0;
+      margin-bottom: 0;
     }
 
     .song-grid-items {
@@ -32,6 +41,75 @@
       .song-preview-item {
         width: 100px;
       }
+
+.grid-container {
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      column-gap: 20px;
+    }
+
+    .song-grid {
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      column-gap: 20px;
+    }
+
+    .song-profile {
+      width: 200px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+      vertical-align: top;
+      margin-right: 15px;
+    }
+
+    .song-profile-picture {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
+    .song-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: 8px;
+      margin-bottom: 5px;
+    }
+
+    .song-composer-block {
+      display: grid;
+      grid-template-columns: 35px 1fr;
+      align-items: center;
+      margin-left: 8px;
+      margin-bottom: 10px;
+    }
+
+    .song-composer-picture {
+      height: 28px;
+      width: 28px;
+      object-fit: cover;
+      border-radius: 14px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    .song-composer-name {
+      color: rgb(100, 100, 100);
+    }
+
+    .song-view-button {
+      background-color: rgb(24, 119, 242);
+      color: white;
+      border: none;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      border-radius: 4px;
+      font-size: 16px;
+      margin-left: 8px;
+      margin-bottom: 10px;
+    }
+
     </style>
   </head>
   <body>
@@ -41,7 +119,7 @@
         <a href="compose.html" class="btn-style">Compose</a>
         <input id="search" class="song-search" placeholder="Search" onkeyup="filter_result()">
       </div>
-        <div id="container" class="container">
+        <div id="container" class="grid-container">
         </div>
     </div>
   </body>
@@ -91,7 +169,8 @@
       songIndex.forEach((song, index) => {
         const grid = document.createElement("div");
         grid.className = "song-grid";
-        grid.append(renderBox(song));
+        // grid.append(renderBox(song));
+        grid.append(renderGrid(song));
         dataElem.append(grid);
       });
       
@@ -108,6 +187,48 @@
         window.location.href = `view.html?id=${song.id}`;
       };
       return box;
+    }
+
+    const renderGrid = (song) => {
+      const songGrid = document.createElement("div");
+      songGrid.className = "song-grid";
+      const songProfile = document.createElement("div");
+      songProfile.className = "song-profile";
+      
+      const songProfilePicture = document.createElement("img");
+      songProfilePicture.className = "song-profile-picture";
+      songProfilePicture.src = `pictures/${song.album}.jpeg`;
+      songProfilePicture.alt = song.genre;
+      songProfile.append(songProfilePicture);
+      
+      const name = document.createElement("p");
+      name.className = "song-name";
+      name.innerText = song.title;
+      songProfile.append(name);
+
+      const composer = document.createElement("div");
+      composer.className = "song-composer-block";
+      const composerPicture = document.createElement("img");
+      composerPicture.className = "song-composer-picture";
+      composerPicture.src = `pictures/${song.album}.jpeg`;
+      composerPicture.alt = song.composer;
+      composer.append(composerPicture);
+      const composerName = document.createElement("p");
+      composerName.className = "song-composer-name";
+      composerName.innerText = song.composer;
+      composer.append(composerName);
+      songProfile.append(composer);
+
+      const view = document.createElement("button");
+      view.className = "song-view-button";
+      view.innerText = "View";
+      view.onclick = function() {
+        window.location.href = `view.html?id=${song.id}`;
+      };
+      songProfile.append(view);
+
+      songGrid.append(songProfile);
+      return songGrid;
     }
 
     const renderItem = (item) => {
