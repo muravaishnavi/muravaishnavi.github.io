@@ -78,14 +78,14 @@
       // add title block
       songFull.append(addSongTitle(data))
       //add Control elements like show/hide lyrics, show/hide swaram etc
-      if(data.song[0]) songFull.append(addSongControls(data.song[0]))
+      if (data.song[0]) songFull.append(addSongControls(data.song[0]))
       data.song.forEach((song, index) => {
         let songInstance = document.createElement("div")
         songInstance.className = "song-instance"
         // add Song Metadata
         songInstance.append(addSongMetadata(index, song))
         // const index = data.songs.indexOf(song)
-        
+
 
         let songBody = addSongStanza(song, index)
         songInstance.append(songBody)
@@ -144,14 +144,14 @@
     const addSongControls = (song) => {
       let elemBlock = document.createElement("div")
       elemBlock.className = "song-controls-block"
-      if(song.stanza[0].swaram && song.stanza[0].swaram.length > 0)
-      elemBlock.append(addCheckBox({id: "swaramToggle", title: "Swaram", className: ".swr-values"}))
-      
+      if (song.stanza[0].swaram && song.stanza[0].swaram.length > 0)
+        elemBlock.append(addCheckBox({ id: "swaramToggle", title: "Swaram", className: ".swr-values" }))
+
       if (song.stanza[0].lyric_en && song.stanza[0].lyric_en.length > 0)
-      elemBlock.append(addCheckBox({ id: "enLyricToggle", title: "Lyrics(Eng)", className: ".en-lyr-values" }))
+        elemBlock.append(addCheckBox({ id: "enLyricToggle", title: "Lyrics(Eng)", className: ".en-lyr-values" }))
 
       if (song.stanza[0].lyric_ta && song.stanza[0].lyric_ta.length > 0)
-      elemBlock.append(addCheckBox({ id: "taLyricToggle", title: "Lyrics(Tam)", className: ".ta-lyr-values" }))
+        elemBlock.append(addCheckBox({ id: "taLyricToggle", title: "Lyrics(Tam)", className: ".ta-lyr-values" }))
       return elemBlock
     }
 
@@ -208,19 +208,24 @@
             if (stz.lyric_ta.length === 0) {
               return
             }
-            else{
+            else {
               lineCount = stz.lyric_ta.length;
             }
           }
-          else{
+          else {
             lineCount = stz.lyric_en.length;
           }
         }
-        else{
+        else {
           lineCount = stz.swaram.length;
         }
 
-        for(let lineIndex=0; lineIndex<lineCount; lineIndex++){
+        //Show Stanza Title
+        const swrAttrs = { field: "title", className: "stz-title" }
+        if (stz.title && stz.title.trim() != "")
+          songStanza.append(renderSwarBlock(songIndex, stzIndex, null, stz.title, swrAttrs))
+
+        for (let lineIndex = 0; lineIndex < lineCount; lineIndex++) {
           if (stz.swaram && stz.swaram.length > 0) {
             const swrAttrs = { field: "swaram", className: "swr-values" }
             songStanza.append(renderSwarBlock(songIndex, stzIndex, lineIndex, stz.swaram[lineIndex], swrAttrs))

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
+
+<head>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
     /* .song-index {
       display: block
     } */
 
-    
+
 
     /* .song-grid {
       width: 200px;
@@ -42,8 +43,8 @@
         width: 100px;
       } */
 
-.grid-container {
-   display: grid;
+    .grid-container {
+      display: grid;
       grid-template-columns: 200px 200px 200px;
       column-gap: 20px;
       row-gap: 20px;
@@ -110,20 +111,21 @@
       margin-left: 8px;
       margin-bottom: 10px;
     }
+  </style>
+</head>
 
-    </style>
-  </head>
-  <body>
-    <div class="body">
-      <div class="header">
-        <a href="index.html" class="btn-style">Home</a>
-        <a href="compose.html" class="btn-style">Compose</a>
-        <input id="search" class="song-search" placeholder="Search" onkeyup="filter_result()">
-      </div>
-        <div id="container" class="grid-container">
-        </div>
+<body>
+  <div class="body">
+    <div class="header">
+      <a href="index.html" class="btn-style">Home</a>
+      <a href="compose.html" class="btn-style">Compose</a>
+      <input id="search" class="song-search" placeholder="Search" onkeyup="filter_result()">
     </div>
-  </body>
+    <div id="container" class="grid-container">
+    </div>
+  </div>
+</body>
+
 </html>
 
 <script type="text/javascript">
@@ -133,112 +135,112 @@
   }
 
   const processData = (response) => {
-      localStorage.setItem("song", response);
-      const jsonData = JSON.parse(response);
-      renderElem(jsonData)
-    };
-
-  
-
-   const loadData = (fileName, callback) => {
-      const xObj = new XMLHttpRequest();
-      xObj.overrideMimeType("application/json");
-      xObj.open('GET', fileName, true);
-      xObj.onreadystatechange = () => {
-        if (xObj.readyState === 4 && xObj.status === 200) {
-          callback(xObj.responseText);
-        }
-      };
-      xObj.send(null);
-    }
+    localStorage.setItem("song", response);
+    const jsonData = JSON.parse(response);
+    renderElem(jsonData)
+  };
 
 
-    const renderElem = (songIndex) => {
-      const dataElem = document.querySelector("#container")
 
-      // Remove all child elements, if any
-      while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
-
-      
-      if(songIndex.length === 0){
-        const noData = document.createElement("p");
-        noData.innerText = "No Matching Song Found";
-        dataElem.append(noData);
-        return;
+  const loadData = (fileName, callback) => {
+    const xObj = new XMLHttpRequest();
+    xObj.overrideMimeType("application/json");
+    xObj.open('GET', fileName, true);
+    xObj.onreadystatechange = () => {
+      if (xObj.readyState === 4 && xObj.status === 200) {
+        callback(xObj.responseText);
       }
+    };
+    xObj.send(null);
+  }
 
-      songIndex.forEach((song, index) => {
-        const grid = document.createElement("div");
-        grid.className = "song-grid";
-        // grid.append(renderBox(song));
-        grid.append(renderGrid(song));
-        dataElem.append(grid);
-      });
-      
+
+  const renderElem = (songIndex) => {
+    const dataElem = document.querySelector("#container")
+
+    // Remove all child elements, if any
+    while (dataElem.firstChild) dataElem.removeChild(dataElem.firstChild)
+
+
+    if (songIndex.length === 0) {
+      const noData = document.createElement("p");
+      noData.innerText = "No Matching Song Found";
+      dataElem.append(noData);
+      return;
     }
 
-    const renderBox = (song) => {
-      const box = document.createElement("div");
-      box.className = "song-grid-items";
-      box.append(renderItem(song.title));
-      box.append(renderItem(song.genre));
-      box.append(renderItem(song.composer));
-      box.append(renderItem(song.album));
-      box.onclick = function() {
-        window.location.href = `view.html?id=${song.id}`;
-      };
-      return box;
-    }
+    songIndex.forEach((song, index) => {
+      const grid = document.createElement("div");
+      grid.className = "song-grid";
+      // grid.append(renderBox(song));
+      grid.append(renderGrid(song));
+      dataElem.append(grid);
+    });
 
-    const renderGrid = (song) => {
-      const songGrid = document.createElement("div");
-      songGrid.className = "song-grid";
-      const songProfile = document.createElement("div");
-      songProfile.className = "song-profile";
-      
-      const songProfilePicture = document.createElement("img");
-      songProfilePicture.className = "song-profile-picture";
-      songProfilePicture.src = `pictures/${song.album}.jpeg`;
-      songProfilePicture.alt = song.genre;
-      songProfile.append(songProfilePicture);
-      
-      const name = document.createElement("p");
-      name.className = "song-name";
-      name.innerText = song.title;
-      songProfile.append(name);
+  }
 
-      const composer = document.createElement("div");
-      composer.className = "song-composer-block";
-      const composerPicture = document.createElement("img");
-      composerPicture.className = "song-composer-picture";
-      composerPicture.src = `pictures/${song.album}.jpeg`;
-      composerPicture.alt = song.composer;
-      composer.append(composerPicture);
-      const composerName = document.createElement("p");
-      composerName.className = "song-composer-name";
-      composerName.innerText = song.composer;
-      composer.append(composerName);
-      songProfile.append(composer);
+  const renderBox = (song) => {
+    const box = document.createElement("div");
+    box.className = "song-grid-items";
+    box.append(renderItem(song.title));
+    box.append(renderItem(song.genre));
+    box.append(renderItem(song.composer));
+    box.append(renderItem(song.album));
+    box.onclick = function () {
+      window.location.href = `view.html?id=${song.id}`;
+    };
+    return box;
+  }
 
-      const view = document.createElement("button");
-      view.className = "song-view-button";
-      view.innerText = "View";
-      view.onclick = function() {
-        window.location.href = `view.html?id=${song.id}`;
-      };
-      songProfile.append(view);
+  const renderGrid = (song) => {
+    const songGrid = document.createElement("div");
+    songGrid.className = "song-grid";
+    const songProfile = document.createElement("div");
+    songProfile.className = "song-profile";
 
-      songGrid.append(songProfile);
-      return songGrid;
-    }
+    const songProfilePicture = document.createElement("img");
+    songProfilePicture.className = "song-profile-picture";
+    songProfilePicture.src = `pictures/${song.album}.jpg`;
+    songProfilePicture.alt = song.genre;
+    songProfile.append(songProfilePicture);
 
-    const renderItem = (item) => {
-      const itemElem = document.createElement("p");
-      itemElem.innerText = item;
-      return itemElem;
-    }
+    const name = document.createElement("p");
+    name.className = "song-name";
+    name.innerText = song.title;
+    songProfile.append(name);
 
-  function filter_result(e){
+    const composer = document.createElement("div");
+    composer.className = "song-composer-block";
+    const composerPicture = document.createElement("img");
+    composerPicture.className = "song-composer-picture";
+    composerPicture.src = `pictures/${song.composer}.jpg`;
+    composerPicture.alt = song.composer;
+    composer.append(composerPicture);
+    const composerName = document.createElement("p");
+    composerName.className = "song-composer-name";
+    composerName.innerText = song.composer;
+    composer.append(composerName);
+    songProfile.append(composer);
+
+    const view = document.createElement("button");
+    view.className = "song-view-button";
+    view.innerText = "View";
+    view.onclick = function () {
+      window.location.href = `view.html?id=${song.id}`;
+    };
+    songProfile.append(view);
+
+    songGrid.append(songProfile);
+    return songGrid;
+  }
+
+  const renderItem = (item) => {
+    const itemElem = document.createElement("p");
+    itemElem.innerText = item;
+    return itemElem;
+  }
+
+  function filter_result(e) {
     const data = localStorage.getItem("song");
     const jsonData = JSON.parse(data);
     const input = document.getElementById("search").value.toLowerCase()
@@ -246,10 +248,10 @@
       if (obj.tag && obj.tag.findIndex((txt => txt.includes(input))) > -1) {
         return curr.concat(obj)
       }
-      else{
+      else {
         return curr
       }
-    },[])
+    }, [])
     renderElem(filtered_data)
   }
 </script>

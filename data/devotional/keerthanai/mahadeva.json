@@ -1,0 +1,94 @@
+{
+    "id": "devotional-keerthanai-mahadeva",
+    "title": "Mahadeva",
+    "genre": "Devotional",
+    "composer": "Tanjavur Shankara Iyer",
+    "album": "Keerthanai",
+    "tag": [
+        "devotional",
+        "mahadeva",
+        "tanjavur",
+        "shankara",
+        "keerthanai",
+        "revathi"
+    ],
+    "song": [
+        {
+            "title": "Mahadeva",
+            "raagam": "Revathi",
+            "thaalam": "Aadhi",
+            "arohanam": [
+                "S",
+                "R1",
+                "M1",
+                "P",
+                "N2",
+                "s"
+            ],
+            "avarohanam": [
+                "S",
+                "N2",
+                "P",
+                "M1",
+                "R1",
+                "S"
+            ],
+            "stanza": [
+                {
+                    "title": "Vrutham",
+                    "swaram": [],
+                    "lyric_en": [
+                        "Visveshwaraaya;Mahadevaaya;Triyambakaya;Tripurantakaaya",
+                        "Trikagnikalaya;kalagnirudraya;Neelakantaya;mrutyumjayaaya",
+                        "Sarveshwaraya;Sadashivaya",
+                        "Shri manmahadevaya namahaa (3)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "title": "Pallavi",
+                    "swaram": [],
+                    "lyric_en": [
+                        "Mahadeva shiva shambo shri mahadeva shiva shambo",
+                        "Shri marakoti sundara prabho ",
+                        "shri mahadeva shiva shambo.."
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "title": "Anupallavi",
+                    "swaram": [],
+                    "lyric_en": [
+                        "Sahasra koti jana palanna Aaa...",
+                        "Sahasra koti jana palanna(2nd variation)",
+                        "Sadu sam raksha na.. pavana(sahasra koti)",
+                        "Sadu samraksha..naa pavana (mahadeva)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "title": "Charanam",
+                    "swaram": [],
+                    "lyric_en": [
+                        "Sarveshwara karunakara muurthe..(2)",
+                        "Samagana priyaveda puurthe..;Parameshwara...",
+                        "Parameshwara gangadara teerdhe(2)",
+                        "Patita pa,vana, shri pasupathe (2nd variation)"
+                    ],
+                    "lyric_ta": []
+                },
+                {
+                    "title": "The End",
+                    "swaram": [],
+                    "lyric_en": [
+                        "Mahadeva shiva shambo ",
+                        "Shri marakotisundara prabho shri mahadeva shiva shambo",
+                        "Shivashambo..(3)",
+                        " shiva Shamm.bo..."
+                    ],
+                    "lyric_ta": []
+                }
+            ]
+        }
+    ]
+}

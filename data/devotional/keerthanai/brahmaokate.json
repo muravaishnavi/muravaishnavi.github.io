@@ -5,10 +5,12 @@
     "composer": "Annamacharya",
     "album": "Keerthanai",
     "tag": [
-        "Devotional",
-        "Keerthanai",
-        "Annamacharya",
-        "Brahmaokate"
+        "devotional",
+        "keerthanai",
+        "annamacharya",
+        "brahmaokate",
+        "bowli",
+        "boopalam"
     ],
     "song": [
         {
@@ -21,7 +23,7 @@
                 "G3",
                 "P",
                 "D1",
-                "S"
+                "s"
             ],
             "avarohanam": [
                 "S",
@@ -55,8 +57,6 @@
                 {
                     "swaram": [],
                     "lyric_en": [
-                        "Brahmam okate... para brahmam okate",
-                        "Brahmam okate... para brahmam okate",
                         "Brahmam okate... para brahmam okate"
                     ],
                     "lyric_ta": []

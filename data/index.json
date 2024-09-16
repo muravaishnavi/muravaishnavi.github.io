@@ -1,170 +1,58 @@
 [
-  {
-    "id": "devotional-keerthanai-brahmaokate",
-    "title": "Brahmaokate",
-    "genre": "Devotional",
-    "album": "Keerthanai",
-    "composer": "Annamacharya",
-    "tag": [
-      "Devotional",
-      "Keerthanai",
-      "Annamacharya",
-      "Brahmaokate"
-    ]
-  },
-  {
-    "id": "devotional-jatheeshwaram-gambeeranattai",
-    "title": "Gambeera Nattai",
-    "genre": "Devotional",
-    "album": "Jatheeshwaram",
-    "composer": "NA",
-    "tag": [
-      "jatheeshwaram",
-      "gambeeranattai",
-      "devotional"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  },
-  {
-    "id": "devotional-ganesan-ganeshapancharathnam",
-    "title": "Ganesha Pancharathnam",
-    "genre": "Devotional",
-    "album": "Ganeshan",
-    "composer": "Shri. Adi Sankara",
-    "tag": [
-      "mudaakaraatta",
-      "ganesha",
-      "devotional",
-      "adhi sankara"
-    ]
-  }
+    {
+        "id": "devotional-keerthanai-brahmaokate",
+        "title": "Brahmaokate",
+        "genre": "Devotional",
+        "album": "Keerthanai",
+        "composer": "Annamacharya",
+        "tag": [
+            "devotional",
+            "keerthanai",
+            "annamacharya",
+            "brahmaokate",
+            "bowli",
+            "boopalam"
+        ]
+    },
+    {
+        "id": "devotional-keerthanai-mahadeva",
+        "title": "Mahadeva",
+        "genre": "Devotional",
+        "album": "Keerthanai",
+        "composer": "Tanjavur Shankara Iyer",
+        "tag": [
+            "devotional",
+            "mahadeva",
+            "tanjavur",
+            "shankara",
+            "keerthanai",
+            "revathi"
+        ]
+    },
+    {
+        "id": "devotional-jatheeshwaram-gambeeranattai",
+        "title": "Gambeera Nattai",
+        "genre": "Devotional",
+        "album": "Jatheeshwaram",
+        "composer": "NA",
+        "tag": [
+            "jatheeshwaram",
+            "gambeeranattai",
+            "devotional",
+            "gambhiranattai"
+        ]
+    },
+    {
+        "id": "devotional-ganesan-ganeshapancharathnam",
+        "title": "Ganesha Pancharathnam",
+        "genre": "Devotional",
+        "album": "Ganeshan",
+        "composer": "AdhiShankara",
+        "tag": [
+            "mudaakaraatta",
+            "ganesha",
+            "devotional",
+            "adhi sankara"
+        ]
+    }
 ]
